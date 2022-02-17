@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		@apply bg-gray text-s-grey font-jost text-[16px] leading-[23px];
+	}
+
+	header,
+	main,
+	footer {
+		/* @apply mx-auto grid items-center;  */
+	}
+
+	main {
+		/* @apply bg-white text-black gap-16 sm:gap-28 md:gap-44; */
+	}
+
+	main > section {
+		/* @apply ctn w-full; */
+	}
+
+	h1 {
+		@apply font-bold  text-[24px] leading-[35px] tracking-[0.33px];
+		/* @apply md:font-bold md: md:text-[56px] md:leading-[58px] md:tracking-[2px]
+		font-bold  text-[40px] leading-[44px] tracking-[1.5px]; */
+	}
+	h2 {
+		/* @apply lg:font-bold lg: lg:text-[40px] lg:leading-[44px] lg:tracking-[1.5px]
+		font-bold  text-[32px] leading-[36px] tracking-[1.15px]; */
+		@apply font-bold  text-[20px] leading-[29px] tracking-[0.25px];
+	}
+	h3 {
+		@apply font-bold  text-[18px] leading-[26px] tracking-[0.25px];
+	}
+	h4 {
+		@apply font-bold  text-[14px] leading-[20px] tracking-[0.2px];
+	}
+
+	input,
+	textarea,
+	select {
+		@apply outline-none px-4 py-2 hover:cursor-pointer;
+	}
+}
+
+@layer components {
+	/* font  */
+	.s-font {
+		@apply text-[15px] leading-[22px];
+	}
+	.b-font {
+		@apply font-semibold text-[13px] leading-[19px];
+	}
+
+	/* layout */
+
+	.gridc {
+		@apply grid place-items-center;
+	}
+
+	.flex-c6 {
+		@apply flex flex-col gap-6;
+	}
+
+	.ctn {
+		@apply max-w-[1440px] mx-auto;
+	}
+
+	/* icon */
+
+	.icon {
+		@apply w-[24px] h-[24px] relative hover:cursor-pointer  md:w-[30px] md:h-[30px];
+	}
+
+	.icon-logo {
+		@apply w-[110px] h-[24px] relative md:w-[160px] md:h-[40px] hover:cursor-pointer;
+	}
+}
+
+@layer utilities {
+}
