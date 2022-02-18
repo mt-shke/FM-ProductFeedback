@@ -1,11 +1,11 @@
-import { IFeedback } from "../../interfaces/interfaces";
+import { IComment, IFeedback } from "../../interfaces/interfaces";
 import { Action } from "../action";
 import { ActionType } from "../action-types";
 
-interface IFeedbackState {
+interface ICommentState {
 	loading: boolean;
 	error: string | null;
-	data: IFeedback[];
+	data: IComment[];
 }
 
 const initialState = {
@@ -14,17 +14,17 @@ const initialState = {
 	data: [],
 };
 
-const feedbackReducer = (state: IFeedbackState = initialState, action: Action) => {
+const commentReducer = (state: ICommentState = initialState, action: Action) => {
 	switch (action.type) {
-		case ActionType.FETCH_FEEDBACKS:
+		case ActionType.FETCH_COMMENTS:
 			return { ...state, loading: true, error: null };
-		case ActionType.FETCH_FEEDBACKS_COMPLETE:
+		case ActionType.FETCH_COMMENTS_COMPLETE:
 			return { ...state, loading: false, data: action.payload };
-		case ActionType.FETCH_FEEDBACKS_ERROR:
+		case ActionType.FETCH_COMMENTS_ERROR:
 			return { ...state, loading: false, error: action.payload.errorMessage };
 		default:
 			return state;
 	}
 };
 
-export default feedbackReducer;
+export default commentReducer;

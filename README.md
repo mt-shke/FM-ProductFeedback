@@ -1,21 +1,48 @@
-<!-- Roadmap -->
+<details>
+<summary>html</summary>
 
- <!-- Go back
-  Roadmap
+```js
+// <!-- Roadmap -->
 
-  Add Feedback
+//  <!-- Go back
+//   Roadmap
 
-  Planned <!-- Add number here -->
+//   Add Feedback
 
-Ideas prioritized for research
+//   Planned <!-- Add number here -->
 
-In-Progress <!-- Add number here -->
-Currently being developed
+// Ideas prioritized for research
 
-Live <!-- Add number here -->
-Released features -->
+// In-Progress <!-- Add number here -->
+// Currently being developed
+
+// Live <!-- Add number here -->
+// Released features -->
+```
+
+</details>
+
+<details>
+<summary>Redux Ts</summary>
 
 redux
+
 ```js
 // npm i --save-exact @types/react-redux react-redux redux redux-thunk
 ```
+
+</details>
+
+<details>
+<summary>Todo</summary>
+
+```js
+// feedbacklist types
+// feedback crud
+// comments && state integration
+// feedback editing/deleting auth
+// filtering
+// final mobile responsive && desktop
+```
+
+</details>

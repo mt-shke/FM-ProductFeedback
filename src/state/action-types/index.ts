@@ -1,18 +1,17 @@
 export enum ActionType {
-	// MOVE_CELL = "move_cell",
-	// DELETE_CELL = "delete_cell",
-	// INSERT_CELL_AFTER = "insert_cell_after",
-	// UPDATE_CELL = "update_cell",
-	// BUNDLE_START = "bundle_start",
-	// BUNDLE_COMPLETE = "bundle_complete",
-	// FETCH_CELLS = "fetch_cells",
-	// FETCH_CELLS_COMPLETE = "fetch_cells_complete",
-	// FETCH_CELLS_ERROR = "fetch_cells_error",
-	// SAVE_CELLS_ERROR = "save_cells_error",
+	// Feedbacks
 	FETCH_FEEDBACKS = "fetch_feedbacks",
 	FETCH_FEEDBACKS_COMPLETE = "fetch_feedbacks_complete",
 	FETCH_FEEDBACKS_ERROR = "fetch_feedbacks_error",
 	CREATE_FEEDBACK = "create_feedback",
 	UPDATE_FEEDBACK = "update_feedback",
 	DELETE_FEEDBACK = "delete_feedback",
+
+	// Comments
+	FETCH_COMMENTS = "fetch_comments",
+	FETCH_COMMENTS_COMPLETE = "fetch_comments_complete",
+	FETCH_COMMENTS_ERROR = "fetch_comments_error",
+	CREATE_COMMENT = "create_comment",
+	UPDATE_COMMENT = "update_comment",
+	DELETE_COMMENT = "delete_comment",
 }

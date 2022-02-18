@@ -10,9 +10,8 @@ const App: React.FC<{}> = () => {
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="/feedback/:id" element={<DetailedFeedbackPage />} />
-				<Route path="/edit-feedback" element={<EditFeedbackPage />} />
+				<Route path="/edit-feedback/:id" element={<EditFeedbackPage />} />
 				<Route path="/create-feedback" element={<CreateFeedbackPage />} />
-				{/* <Route path="/feedback/:id" element={<CreateFeedbackPage />} /> */}
 			</Routes>
 		</BrowserRouter>
 	);

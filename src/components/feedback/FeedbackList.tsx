@@ -7,7 +7,7 @@ import FeedbackCard, { IFeedbackCardProps } from "../UI/cards/FeedbackCard";
 
 const FeedbackList: React.FC<{ list: any }> = ({ list }) => {
 	return (
-		<section className="flex-c6 items-start p-8 bg-gray">
+		<section className="grid grid-flow-row gap-6 items-start p-6 bg-gray">
 			{list.map((request: any) => (
 				<Link to={`/feedback/${request._id}`} key={request._id}>
 					<FeedbackCard
@@ -15,8 +15,8 @@ const FeedbackList: React.FC<{ list: any }> = ({ list }) => {
 						title={request.title}
 						category={request.category}
 						description={request.description}
-						upvotes={request.upvotes}
-						comments={request.comments}
+						numberOfUpvotes={request.numberOfUpvotes + request.upvoters.length}
+						comments={request.comments.length}
 					/>
 				</Link>
 			))}

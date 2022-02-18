@@ -17,7 +17,7 @@ const Main: React.FC = () => {
 
 	return (
 		<main className="h-full w-full flex flex-col">
-			<section className="h-14 flex justify-between items-center px-6 py-2 bg-s-grey text-s-white">
+			<section className="h-14 flex justify-between items-center px-6 py-2 bg-s-grey text-s-white whitespace-nowrap">
 				<div>
 					<span>Sort by:</span>
 					<label htmlFor="sortFilter">
@@ -29,7 +29,7 @@ const Main: React.FC = () => {
 						</select>
 					</label>
 				</div>
-				<AddFeedbackButton className="h-full w-fit gridc px-4 bg-purple rounded-xl">
+				<AddFeedbackButton className="h-full w-fit gridc px-4 bg-purple rounded-xl ">
 					+ Add Feedback
 				</AddFeedbackButton>
 			</section>
