@@ -1,4 +1,3 @@
-import { IComponent } from "../../../interfaces";
 import GoBackButton from "../../UI/buttons/GoBackButton";
 import FeedbackForm from "./FeedbackForm";
 

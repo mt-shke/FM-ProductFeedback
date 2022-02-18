@@ -1,13 +1,13 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { IFeedback } from "../../../interfaces/interfaces";
+import { IFeedback } from "../../../interfaces";
 import Button from "../../UI/buttons/Button";
 
-interface IFeedbackForm extends IFeedback {
-	edit?: Boolean;
+interface IFeedbackForm {
+	feedback?: IFeedback;
 }
 
-const FeedbackForm: React.FC<IFeedbackForm> = ({ edit, title, description, category }) => {
+const FeedbackForm: React.FC<IFeedbackForm> = ({ feedback }) => {
 	const titleRef = useRef<HTMLInputElement>(null);
 	const categoryRef = useRef<HTMLSelectElement>(null);
 	const contentRef = useRef<HTMLTextAreaElement>(null);
@@ -27,9 +27,9 @@ const FeedbackForm: React.FC<IFeedbackForm> = ({ edit, title, description, categ
 			className="relative w-full flex flex-col gap-6 p-6 pt-16 bg-white rounded-lg"
 		>
 			<span className="absolute -top-6 h-12 aspect-square">
-				<img src={`/assets/shared/icon-${edit ? "edit" : "new"}-feedback.svg`} alt="icon" />
+				<img src={`/assets/shared/icon-${feedback ? "edit" : "new"}-feedback.svg`} alt="icon" />
 			</span>
-			<h2 className="mb-6">{edit ? `Editing` : "Create New Feedback"}</h2>
+			<h2 className="mb-6">{feedback ? `Editing` : "Create New Feedback"}</h2>
 
 			<label className="flex flex-col gap-1" htmlFor="title">
 				<h3 className="b-font">Feedback Title</h3>
@@ -38,7 +38,7 @@ const FeedbackForm: React.FC<IFeedbackForm> = ({ edit, title, description, categ
 					className="h-10 bg-gray rounded-lg"
 					type="text"
 					ref={titleRef}
-					defaultValue={edit ? title : ""}
+					defaultValue={feedback ? feedback.title : ""}
 				/>
 			</label>
 
@@ -47,7 +47,7 @@ const FeedbackForm: React.FC<IFeedbackForm> = ({ edit, title, description, categ
 				<span className="s-font">Choose a category for your feedback</span>
 				<select
 					className="h-10 bg-gray rounded-lg"
-					defaultValue={edit ? category : "Feature"}
+					defaultValue={feedback ? feedback.category : "Feature"}
 					name="category"
 					id="category"
 					ref={categoryRef}
@@ -68,11 +68,11 @@ const FeedbackForm: React.FC<IFeedbackForm> = ({ edit, title, description, categ
 					maxLength={600}
 					rows={4}
 					ref={contentRef}
-					defaultValue={edit ? description : ""}
+					defaultValue={feedback ? feedback.description : ""}
 				/>
 			</label>
 			<div>
-				{edit ? (
+				{feedback ? (
 					<>
 						<Button className="h-full w-full gridc p-2 my-4 bg-purple text-white rounded-lg">
 							Save Changes

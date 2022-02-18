@@ -1,3 +1,8 @@
-import { createFeedback, fetchFeedbacks } from "./feedbackActionCreator";
+import {
+	createFeedback,
+	fetchFeedbacks,
+	setTargetFeedback,
+	fetchSingleFeedbackAction,
+} from "./feedbackActionCreator";
 
-export { createFeedback, fetchFeedbacks };
+export { createFeedback, fetchFeedbacks, setTargetFeedback, fetchSingleFeedbackAction };

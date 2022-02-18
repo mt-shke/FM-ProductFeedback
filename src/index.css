@@ -38,9 +38,19 @@
 		@apply font-bold  text-[14px] leading-[20px] tracking-[0.2px];
 	}
 
-	input,
-	textarea,
+	select,
+	option {
+		@apply outline-none hover:cursor-pointer;
+	}
 	select {
+		appearance: none;
+	}
+	option {
+		@apply bg-s-grey;
+	}
+
+	input,
+	textarea {
 		@apply outline-none px-4 py-2 hover:cursor-pointer;
 	}
 }

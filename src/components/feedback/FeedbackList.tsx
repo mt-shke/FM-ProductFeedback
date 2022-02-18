@@ -1,23 +1,20 @@
 import { Link } from "react-router-dom";
-import FeedbackCard, { IFeedbackCardProps } from "../UI/cards/FeedbackCard";
+import { useActions } from "../../hooks/useActions";
+import { IFeedback } from "../../interfaces";
+import FeedbackCard from "../UI/cards/FeedbackCard";
 
-// interface IFeedbackListProps {
-// 	list: IFeedbackCardProps[];
-// }
+interface IFeedbackListProps {
+	list: IFeedback[];
+}
 
-const FeedbackList: React.FC<{ list: any }> = ({ list }) => {
+const FeedbackList: React.FC<IFeedbackListProps> = ({ list }) => {
+	const { setTargetFeedback } = useActions();
+
 	return (
 		<section className="grid grid-flow-row gap-6 items-start p-6 bg-gray">
-			{list.map((request: any) => (
-				<Link to={`/feedback/${request._id}`} key={request._id}>
-					<FeedbackCard
-						_id={request._id}
-						title={request.title}
-						category={request.category}
-						description={request.description}
-						numberOfUpvotes={request.numberOfUpvotes + request.upvoters.length}
-						comments={request.comments.length}
-					/>
+			{list.map((feedback: any) => (
+				<Link onClick={() => setTargetFeedback(feedback)} to={`/feedback/${feedback._id}`} key={feedback._id}>
+					<FeedbackCard feedback={feedback} />
 				</Link>
 			))}
 		</section>
