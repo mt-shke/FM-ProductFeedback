@@ -1,16 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useActions } from "./useActions";
 import { useTypedSelector } from "./useTypedSelector";
 
 export const useFeedback = () => {
+	const [isUpdated, setIsUpdated] = useState(false);
 	const { fetchFeedbacks } = useActions();
-
 	const { data, loading, targetFeedback } = useTypedSelector((state) => state.feedbacks);
 	useEffect(() => {
-		console.log(data);
+		if (!isUpdated) {
+			fetchFeedbacks();
+			setIsUpdated(true);
+			return;
+		}
 		if (data !== null) return;
 		if (loading) return;
 		fetchFeedbacks();
-	});
+	}, [data]);
 	return { data, targetFeedback };
 };

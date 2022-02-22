@@ -1,4 +1,5 @@
-import { IFeedback } from "../../interfaces/feedbackInterface";
+import { IComment, ICreatedComment } from "../../interfaces";
+import { ICommentReply, IFeedback } from "../../interfaces/feedbackInterface";
 import { ActionType } from "../action-types";
 
 // Fetch ALL Feedbacks
@@ -46,10 +47,32 @@ export interface IUpdateFeedbackAction {
 }
 export interface IDeleteFeedbackAction {
 	type: ActionType.DELETE_FEEDBACK;
-	payload: string;
+	payload: IFeedback[];
 }
 
 export interface ISetTargetFeedbackAction {
 	type: ActionType.SET_TARGET_FEEDBACK;
+	payload: IFeedback;
+}
+
+// Comments
+export interface ISetCommentReply {
+	type: ActionType.SET_COMMENT_REPLY;
+	payload: ICommentReply;
+}
+export interface IResetCommentReply {
+	type: ActionType.RESET_COMMENT_REPLY;
+}
+
+export interface ICreateCommentAction {
+	type: ActionType.CREATE_COMMENT;
+	payload: IFeedback;
+}
+export interface IUpdateCommentAction {
+	type: ActionType.UPDATE_COMMENT;
+	payload: ICreatedComment;
+}
+export interface IDeleteCommentAction {
+	type: ActionType.DELETE_COMMENT;
 	payload: IFeedback;
 }

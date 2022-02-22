@@ -10,16 +10,13 @@ const CommentsList: React.FC<ICommentsListProps> = ({ list }) => {
 		(a: IComment, b: IComment) => +new Date(a.createdAt as Date) - +new Date(b.createdAt as Date)
 	);
 
-	const subComments = sorted.filter((comm) => comm.comment);
-	const directReplies = sorted.filter((comm) => !comm.comment);
-
+	const subComments = [...sorted].filter((comm) => comm.comment);
+	const feedbackReplies = [...sorted].filter((comm) => !comm.comment);
 	return (
-		<section className="grid grid-flow-row gap-6 items-start">
-			{directReplies.map((commentItem: IComment, index: number) => {
-				const commentReplies = subComments.filter((comm) => comm._id === commentItem._id);
-
+		<section className="grid grid-flow-row gap-6 items-start animate-fade">
+			{feedbackReplies.map((commentItem: IComment, index: number) => {
 				return (
-					<CommentCard comment={commentItem} index={index} key={commentItem._id} replies={commentReplies} />
+					<CommentCard comment={commentItem} index={index} key={commentItem._id} subComments={subComments} />
 				);
 			})}
 		</section>

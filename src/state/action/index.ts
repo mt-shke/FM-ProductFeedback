@@ -12,9 +12,27 @@ import {
 	IDeleteFeedbackAction,
 	// Set target
 	ISetTargetFeedbackAction,
+
+	// Comments
+	ISetCommentReply,
+	IResetCommentReply,
+	ICreateCommentAction,
+	IUpdateCommentAction,
+	IDeleteCommentAction,
 } from "./feedbackAction";
 
+import {
+	IGetUserCookie,
+	ILoginUserAction,
+	ILoginUserActionComplete,
+	ILoginUserActionError,
+	IVerifyUserAction,
+	IVerifyUserCompleteAction,
+	IVerifyUserErrorAction,
+} from "./userAction";
+
 export type Action =
+	// FEEDBACKS --	FEEDBACKS
 	| IFetchFeedbacksAction
 	| IFetchFeedbacksCompleteAction
 	| IFetchFeedbacksErrorAction
@@ -24,4 +42,21 @@ export type Action =
 	| IFetchSingleFeedbackErrorAction
 	// CRUD
 	| ICreateFeedbackAction
-	| ISetTargetFeedbackAction;
+	| IUpdateFeedbackAction
+	| IDeleteFeedbackAction
+	| ISetTargetFeedbackAction
+	// Comments
+	| ISetCommentReply
+	| IResetCommentReply
+	| ICreateCommentAction
+	| IUpdateCommentAction
+	| IDeleteCommentAction
+
+	// USER -- USER
+	| IGetUserCookie
+	| ILoginUserAction
+	| ILoginUserActionComplete
+	| ILoginUserActionError
+	| IVerifyUserAction
+	| IVerifyUserCompleteAction
+	| IVerifyUserErrorAction;

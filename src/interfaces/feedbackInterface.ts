@@ -16,8 +16,21 @@ export interface IFeedbackState {
 	error: string | null;
 	data: IFeedback[] | null;
 	targetFeedback: IFeedback | null;
+	commentReply: ICommentReply | null;
 }
 
 export interface IFeedbackComponent {
 	feedback?: IFeedback;
+}
+
+export interface ICreatedFeedback {
+	title: string;
+	category: string;
+	description: string;
+	feedbackId?: string;
+}
+
+export interface ICommentReply {
+	commentId: string;
+	replyToUsername: string;
 }

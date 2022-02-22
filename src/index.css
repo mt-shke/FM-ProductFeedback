@@ -49,9 +49,13 @@
 		@apply bg-s-grey;
 	}
 
+	.form option {
+		@apply bg-gray;
+	}
+
 	input,
 	textarea {
-		@apply outline-none px-4 py-2 hover:cursor-pointer;
+		@apply outline-none resize-none px-4 py-2 hover:cursor-pointer;
 	}
 }
 

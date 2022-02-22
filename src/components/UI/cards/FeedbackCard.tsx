@@ -10,7 +10,7 @@ const FeedbackCard: React.FC<IFeedbackCardProps> = ({ feedback }) => {
 	const { _id, title, category, description, upvoters, numberOfUpvotes, comments } = feedback;
 
 	return (
-		<article className="w-full flex flex-col gap-3 justify-start items-start p-6 bg-white rounded-lg s-font">
+		<article className="w-full flex flex-col gap-3 justify-start items-start p-6 bg-white rounded-lg s-font animate-fade">
 			<h2 className="s-font">{title}</h2>
 			<p>{description}</p>
 			<CategoriesButton>{category}</CategoriesButton>

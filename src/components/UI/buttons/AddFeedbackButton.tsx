@@ -1,9 +1,16 @@
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { IComponent } from "../../../interfaces";
+import { IComponent, IUser } from "../../../interfaces";
 
-const AddFeedbackButton: React.FC<IComponent> = ({ children, className }) => {
+interface IAddFeedbackButtonProps {
+	children?: ReactNode;
+	className?: string;
+	onClick?: (e: React.MouseEvent) => void;
+}
+
+const AddFeedbackButton: React.FC<IAddFeedbackButtonProps> = ({ children, className, onClick }) => {
 	return (
-		<Link to="/create-feedback" className={className}>
+		<Link onClick={onClick} to="/create-feedback" className={className}>
 			{children}
 		</Link>
 	);

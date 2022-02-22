@@ -14,14 +14,19 @@ module.exports = {
 			black: "#000000",
 			"s-white": "#F7F8FD",
 			gray: "#F2F4FF",
+			"s-gray": "#f4f4f8",
 			grey: "#647196",
 			"s-grey": "#3A4374",
 			red: "#d73737",
+			"transparent-g": "rgba(58, 67, 116,0.6)",
 			transparent: "rgb(0, 0, 0, 0)",
 		},
 		animation: {
 			spinning: " spinning 1s linear infinite",
 			wiggle: "wiggle 1s ease-in-out infinite",
+			fade: "fadeIn .3s ease-in",
+			fade5: "fadeIn .3s ease-out",
+			move: "move .5s ease-out",
 		},
 		keyframes: {
 			spinning: {
@@ -38,6 +43,22 @@ module.exports = {
 				},
 				"50%": {
 					transform: "rotate(90deg)",
+				},
+			},
+			fadeIn: {
+				"0%": {
+					opacity: "0",
+				},
+				"100%": {
+					opacity: "1",
+				},
+			},
+			move: {
+				"0%": {
+					transform: "translate(2rem)",
+				},
+				"100%": {
+					transform: "translate(0)",
 				},
 			},
 		},

@@ -5,9 +5,15 @@ export interface IComment {
 	user: IUser;
 	content: string;
 	productRequest: string;
-	comment: string[] | IComment[];
+	comment?: string;
 	createdAt?: Date;
 	updatedAt?: Date;
+}
+
+export interface ICreatedComment {
+	content: string;
+	productRequest: string;
+	comment: string;
 }
 
 export interface ICommentDetailed {

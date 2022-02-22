@@ -1,4 +1,4 @@
-import { IFeedbackState } from "../../interfaces";
+import { IFeedback, IFeedbackState } from "../../interfaces";
 import { Action } from "../action";
 import { ActionType } from "../action-types";
 
@@ -7,6 +7,7 @@ const initialState: IFeedbackState = {
 	error: null,
 	data: null,
 	targetFeedback: null,
+	commentReply: null,
 };
 
 const feedbackReducer = (state: IFeedbackState = initialState, action: Action) => {
@@ -26,9 +27,36 @@ const feedbackReducer = (state: IFeedbackState = initialState, action: Action) =
 		case ActionType.FETCH_SINGLE_FEEDBACK_ERROR:
 			return { ...state, loading: false, error: action.payload.errorMessage };
 
+		// Create feedback
+		case ActionType.CREATE_FEEDBACK:
+			let newData: IFeedback[] = [];
+			if (state.data?.length) {
+				newData = [...state.data];
+			}
+			newData = [...newData, action.payload];
+			return { ...state, data: newData, targetFeedback: action.payload };
+
+		case ActionType.UPDATE_FEEDBACK:
+			return { ...state, targetFeedback: action.payload };
+
+		case ActionType.DELETE_FEEDBACK: {
+			return { ...state, data: action.payload, targetFeedback: null };
+		}
+
 		// Set target
 		case ActionType.SET_TARGET_FEEDBACK:
 			return { ...state, targetFeedback: action.payload };
+
+		// Comments
+		case ActionType.SET_COMMENT_REPLY:
+			return { ...state, commentReply: action.payload };
+		case ActionType.RESET_COMMENT_REPLY:
+			return { ...state, commentReply: null };
+
+		case ActionType.CREATE_COMMENT:
+			return { ...state, targetFeedback: action.payload, commentReply: null };
+		case ActionType.DELETE_COMMENT:
+			return { ...state, targetFeedback: action.payload, commentReply: null };
 
 		default:
 			return state;

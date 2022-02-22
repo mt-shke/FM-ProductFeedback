@@ -3,6 +3,28 @@ import {
 	fetchFeedbacks,
 	setTargetFeedback,
 	fetchSingleFeedbackAction,
+	updateFeedback,
+	deleteFeedback,
+	setReplyComment,
+	resetReplyComment,
+	createComment,
+	deleteComment,
 } from "./feedbackActionCreator";
 
-export { createFeedback, fetchFeedbacks, setTargetFeedback, fetchSingleFeedbackAction };
+import { loginUser, verifyUserCookie } from "./userActionCreator";
+
+export {
+	createFeedback,
+	fetchFeedbacks,
+	setTargetFeedback,
+	updateFeedback,
+	deleteFeedback,
+	fetchSingleFeedbackAction,
+	setReplyComment,
+	resetReplyComment,
+	createComment,
+	deleteComment,
+	// user
+	loginUser,
+	verifyUserCookie,
+};

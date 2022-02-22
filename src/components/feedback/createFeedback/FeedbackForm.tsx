@@ -1,35 +1,57 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { IFeedback } from "../../../interfaces";
-import Button from "../../UI/buttons/Button";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useActions } from "../../../hooks/useActions";
+import { IPageProps } from "../../../interfaces";
+import EditButtons from "../editFeedback/EditButtons";
 
-interface IFeedbackForm {
-	feedback?: IFeedback;
+interface IFeedbackFormProps extends IPageProps {
+	edit?: boolean;
 }
 
-const FeedbackForm: React.FC<IFeedbackForm> = ({ feedback }) => {
+const FeedbackForm: React.FC<IFeedbackFormProps> = ({ data, edit }) => {
+	const feedback = data.feedbacks?.targetFeedback ? data.feedbacks?.targetFeedback : null;
 	const titleRef = useRef<HTMLInputElement>(null);
 	const categoryRef = useRef<HTMLSelectElement>(null);
 	const contentRef = useRef<HTMLTextAreaElement>(null);
+	const navigate = useNavigate();
+	const { createFeedback, deleteFeedback, updateFeedback } = useActions();
 
-	const submitHandler = (e: React.MouseEvent | React.FormEvent) => {
+	const submitHandler = async (e: React.MouseEvent | React.FormEvent, eventType: string) => {
 		e.preventDefault();
-		const title = titleRef.current?.value;
-		const category = categoryRef.current?.value;
-		const description = contentRef.current?.value;
+		// onSubmit  - Check if event is "delete" | "create" | "edit"
+		if (eventType === "delete") {
+			await deleteFeedback(feedback?._id as string);
+			navigate("/");
+			return;
+		}
+		const title = titleRef.current?.value.toString().trim() as string;
+		const category = categoryRef.current?.value.toString().trim() as string;
+		const description = contentRef.current?.value.toString().trim() as string;
+		if (title === "" || category === "" || description === "") {
+			return;
+		}
+		if (eventType === "create") {
+			const response = await createFeedback({ title, category, description });
+			navigate("/feedback/" + response);
+			return;
+		}
 
-		// function submit to DB new productRequest
+		if (eventType === "edit") {
+			const response = await updateFeedback({ title, category, description, feedbackId: feedback?._id });
+			navigate("/feedback/" + response);
+			return;
+		}
 	};
 
 	return (
 		<form
-			onSubmit={(e) => submitHandler(e)}
+			onSubmit={(e) => submitHandler(e, edit ? "edit" : "add")}
 			className="relative w-full flex flex-col gap-6 p-6 pt-16 bg-white rounded-lg"
 		>
 			<span className="absolute -top-6 h-12 aspect-square">
-				<img src={`/assets/shared/icon-${feedback ? "edit" : "new"}-feedback.svg`} alt="icon" />
+				<img src={`/assets/shared/icon-${edit && feedback ? "edit" : "new"}-feedback.svg`} alt="icon" />
 			</span>
-			<h2 className="mb-6">{feedback ? `Editing` : "Create New Feedback"}</h2>
+			<h2 className="mb-6">{edit && feedback ? `Editing` : "Create New Feedback"}</h2>
 
 			<label className="flex flex-col gap-1" htmlFor="title">
 				<h3 className="b-font">Feedback Title</h3>
@@ -38,7 +60,7 @@ const FeedbackForm: React.FC<IFeedbackForm> = ({ feedback }) => {
 					className="h-10 bg-gray rounded-lg"
 					type="text"
 					ref={titleRef}
-					defaultValue={feedback ? feedback.title : ""}
+					defaultValue={edit && feedback ? feedback.title : ""}
 				/>
 			</label>
 
@@ -46,8 +68,8 @@ const FeedbackForm: React.FC<IFeedbackForm> = ({ feedback }) => {
 				<h3 className="b-font">Category</h3>
 				<span className="s-font">Choose a category for your feedback</span>
 				<select
-					className="h-10 bg-gray rounded-lg"
-					defaultValue={feedback ? feedback.category : "Feature"}
+					className="h-10 bg-gray rounded-lg form"
+					defaultValue={edit && feedback ? feedback.category : "Feature"}
 					name="category"
 					id="category"
 					ref={categoryRef}
@@ -68,34 +90,15 @@ const FeedbackForm: React.FC<IFeedbackForm> = ({ feedback }) => {
 					maxLength={600}
 					rows={4}
 					ref={contentRef}
-					defaultValue={feedback ? feedback.description : ""}
+					defaultValue={edit && feedback ? feedback.description : ""}
 				/>
 			</label>
-			<div>
-				{feedback ? (
-					<>
-						<Button className="h-full w-full gridc p-2 my-4 bg-purple text-white rounded-lg">
-							Save Changes
-						</Button>
-						<Link to="/" className="gridc p-2 rounded-lg bg-s-grey text-white">
-							Cancel
-						</Link>
-						<Button className="h-full w-full gridc p-2 my-4 bg-red text-white rounded-lg">Delete</Button>
-					</>
-				) : (
-					<>
-						<button
-							onClick={(e) => submitHandler(e)}
-							className="h-full w-full gridc p-2 my-4 bg-purple text-white rounded-lg"
-						>
-							Add Feedback
-						</button>
-						<Link to="/" className="gridc p-2 rounded-lg bg-s-grey text-white">
-							Cancel
-						</Link>
-					</>
-				)}
-			</div>
+
+			<EditButtons
+				edit={edit}
+				feedback={feedback}
+				onSubmitHandler={(e, eventType) => submitHandler(e, eventType)}
+			/>
 		</form>
 	);
 };

@@ -15,10 +15,23 @@ export enum ActionType {
 	SET_TARGET_FEEDBACK = "set_target_feedback",
 
 	// Comments
-	FETCH_COMMENTS = "fetch_comments",
-	FETCH_COMMENTS_COMPLETE = "fetch_comments_complete",
-	FETCH_COMMENTS_ERROR = "fetch_comments_error",
+	SET_COMMENT_REPLY = "set_comment_reply",
+	RESET_COMMENT_REPLY = "reset_comment_reply",
 	CREATE_COMMENT = "create_comment",
 	UPDATE_COMMENT = "update_comment",
 	DELETE_COMMENT = "delete_comment",
+
+	// USER
+	// Get user
+	GET_COOKIE_USER = "get_cookie_user",
+	FETCH_USER = "fetch_user",
+
+	// Verify cookies
+	VERIFY_USER = "verify_user",
+	VERIFY_USER_COMPLETE = "verify_user_complete",
+	VERIFY_USER_ERROR = "verify_user_error",
+	// Login
+	LOGIN_USER = "login_user",
+	LOGIN_USER_COMPLETE = "login_user_complete",
+	LOGIN_USER_ERROR = "login_user_error",
 }

@@ -1,6 +1,21 @@
 export interface IUser {
-	_id: string;
+	userId: string;
+	_id?: string;
+	email: string;
 	fullname: string;
 	username: string;
 	image: string;
+	role: "user" | "admin";
+}
+
+export interface IUserState {
+	loading: boolean;
+	error: string | null;
+	verified: boolean;
+	data: IUser | null;
+}
+
+export interface IuserCredentials {
+	email: string;
+	password: string;
 }

@@ -1,28 +1,4 @@
 <details>
-<summary>html</summary>
-
-```js
-// <!-- Roadmap -->
-
-//  <!-- Go back
-//   Roadmap
-
-//   Add Feedback
-
-//   Planned <!-- Add number here -->
-
-// Ideas prioritized for research
-
-// In-Progress <!-- Add number here -->
-// Currently being developed
-
-// Live <!-- Add number here -->
-// Released features -->
-```
-
-</details>
-
-<details>
 <summary>Redux Ts</summary>
 
 redux
@@ -37,10 +13,8 @@ redux
 <summary>Todo</summary>
 
 ```js
-// feedbacklist types
-// feedback crud
-// comments && state integration
-// feedback editing/deleting auth
+// comments update
+// auth
 // filtering
 // final mobile responsive && desktop
 ```
