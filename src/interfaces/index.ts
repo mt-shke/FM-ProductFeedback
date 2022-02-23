@@ -4,12 +4,13 @@ import {
 	ICommentReply,
 	ICreatedFeedback,
 	IFeedbackComponent,
+	CategoriesType,
 } from "./feedbackInterface";
 import { IComment, ICommentDetailed, ICreatedComment } from "./commentInterface";
 import { IPageProps } from "./pageInterface";
 import IRoute from "./route";
 import { ReactNode } from "react";
-import { IUser, IUserState, IuserCredentials } from "./userInterface";
+import { IUser, IUserState, IuserCredentials, INewUser } from "./userInterface";
 
 interface IComponent {
 	children?: ReactNode;
@@ -32,4 +33,6 @@ export type {
 	ICommentReply,
 	ICreatedFeedback,
 	IFeedbackComponent,
+	CategoriesType,
+	INewUser,
 };

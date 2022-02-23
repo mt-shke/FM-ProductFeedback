@@ -1,3 +1,4 @@
+import { loadavg } from "os";
 import { IFeedback, IFeedbackState } from "../../interfaces";
 import { Action } from "../action";
 import { ActionType } from "../action-types";
@@ -8,6 +9,7 @@ const initialState: IFeedbackState = {
 	data: null,
 	targetFeedback: null,
 	commentReply: null,
+	categoryFilter: "All",
 };
 
 const feedbackReducer = (state: IFeedbackState = initialState, action: Action) => {
@@ -43,9 +45,45 @@ const feedbackReducer = (state: IFeedbackState = initialState, action: Action) =
 			return { ...state, data: action.payload, targetFeedback: null };
 		}
 
-		// Set target
+		// Set Filter
 		case ActionType.SET_TARGET_FEEDBACK:
 			return { ...state, targetFeedback: action.payload };
+		case ActionType.SET_FILTER_CATEGORY:
+			return { ...state, categoryFilter: action.payload };
+
+		case ActionType.SET_FEEDBACK_ORDER:
+			let orderedFeedbacks = state.data;
+			if (state.data?.length) {
+				if (action.payload === "mostComments") {
+					orderedFeedbacks = [...state.data].sort((a, b) => a.comments.length - b.comments.length).reverse();
+				}
+
+				if (action.payload === "leastComments") {
+					orderedFeedbacks = [...state.data].sort((a, b) => a.comments.length - b.comments.length);
+				}
+
+				if (action.payload === "mostUpvotes") {
+					orderedFeedbacks = [...state.data]
+						.sort((a, b) => a.numberOfUpvotes + a.upvoters.length - (b.numberOfUpvotes + b.upvoters.length))
+						.reverse();
+				}
+
+				if (action.payload === "leastUpvotes") {
+					orderedFeedbacks = [...state.data].sort(
+						(a, b) => a.numberOfUpvotes + a.upvoters.length - (b.numberOfUpvotes + b.upvoters.length)
+					);
+				}
+			}
+			return { ...state, data: orderedFeedbacks };
+
+		// UPvotes
+
+		case ActionType.SET_UPVOTE:
+			return { ...state, loading: true, error: null };
+		case ActionType.SET_UPVOTE_COMPLETE:
+			return { ...state, loading: false, error: null };
+		case ActionType.SET_UPVOTE_ERROR:
+			return { ...state, loading: false, error: action.payload };
 
 		// Comments
 		case ActionType.SET_COMMENT_REPLY:

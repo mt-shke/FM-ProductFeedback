@@ -13,6 +13,12 @@ export enum ActionType {
 	DELETE_FEEDBACK = "delete_feedback",
 	// Set Target
 	SET_TARGET_FEEDBACK = "set_target_feedback",
+	// Set Filter
+	SET_FILTER_CATEGORY = "set_filter_category",
+	SET_FEEDBACK_ORDER = "set_feedback_order",
+	SET_UPVOTE = "set_upvote",
+	SET_UPVOTE_COMPLETE = "set_upvote_complete",
+	SET_UPVOTE_ERROR = "set_upvote_error",
 
 	// Comments
 	SET_COMMENT_REPLY = "set_comment_reply",
@@ -34,4 +40,8 @@ export enum ActionType {
 	LOGIN_USER = "login_user",
 	LOGIN_USER_COMPLETE = "login_user_complete",
 	LOGIN_USER_ERROR = "login_user_error",
+	// Register
+	REGISTER_USER = "register_user",
+	REGISTER_USER_COMPLETE = "register_user_complete",
+	REGISTER_USER_ERROR = "register_user_error",
 }

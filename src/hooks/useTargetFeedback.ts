@@ -21,7 +21,7 @@ const useTargetFeedback = () => {
 		fetchSingleFeedbackAction(id as string);
 	}, [targetFeedback]);
 
-	return targetFeedback;
+	return targetFeedback as IFeedback;
 };
 
 export default useTargetFeedback;

@@ -10,12 +10,14 @@ const FeedbackCard: React.FC<IFeedbackCardProps> = ({ feedback }) => {
 	const { _id, title, category, description, upvoters, numberOfUpvotes, comments } = feedback;
 
 	return (
-		<article className="w-full flex flex-col gap-3 justify-start items-start p-6 bg-white rounded-lg s-font animate-fade">
+		<article className="w-full flex flex-col gap-3 justify-start items-start p-6 bg-white rounded-lg s-font animate-fade feedbackCard">
 			<h2 className="s-font">{title}</h2>
 			<p>{description}</p>
 			<CategoriesButton>{category}</CategoriesButton>
 			<div className="w-full flex justify-between items-center">
-				<UpvotesButton>{numberOfUpvotes + upvoters.length}</UpvotesButton>
+				<UpvotesButton feedbackId={_id} upvoters={upvoters}>
+					{numberOfUpvotes}
+				</UpvotesButton>
 				<span className="flex gap-2 items-center b-font">
 					<img src="/assets/shared/icon-comments.svg" alt="icon" />
 					{+comments.length}

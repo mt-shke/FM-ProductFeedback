@@ -26,6 +26,7 @@ module.exports = {
 			wiggle: "wiggle 1s ease-in-out infinite",
 			fade: "fadeIn .3s ease-in",
 			fade5: "fadeIn .3s ease-out",
+			fadeOut: "fadeOut 1.5s ease-out",
 			move: "move .5s ease-out",
 		},
 		keyframes: {
@@ -51,6 +52,14 @@ module.exports = {
 				},
 				"100%": {
 					opacity: "1",
+				},
+			},
+			fadeOut: {
+				"0%": {
+					opacity: "1",
+				},
+				"100%": {
+					opacity: "0",
 				},
 			},
 			move: {

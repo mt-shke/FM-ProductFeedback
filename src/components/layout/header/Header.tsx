@@ -48,7 +48,7 @@ const Header: React.FC<IPageProps> = ({ data }) => {
 					</div>
 					<div
 						onClick={() => setModal(false)}
-						className="fixed z-0 inset-0 bg-transparent-g animate-fade5"
+						className="fixed z-[9] inset-0 bg-transparent-g animate-fade5"
 					></div>
 				</>
 			)}

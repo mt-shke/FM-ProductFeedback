@@ -1,5 +1,5 @@
-import { IComment, ICreatedComment } from "../../interfaces";
-import { ICommentReply, IFeedback } from "../../interfaces/feedbackInterface";
+import { ICreatedComment, CategoriesType } from "../../interfaces";
+import { OrderFilterType, ICommentReply, IFeedback } from "../../interfaces/feedbackInterface";
 import { ActionType } from "../action-types";
 
 // Fetch ALL Feedbacks
@@ -50,9 +50,28 @@ export interface IDeleteFeedbackAction {
 	payload: IFeedback[];
 }
 
+// Set Target
 export interface ISetTargetFeedbackAction {
 	type: ActionType.SET_TARGET_FEEDBACK;
 	payload: IFeedback;
+}
+export interface ISetFilterCategory {
+	type: ActionType.SET_FILTER_CATEGORY;
+	payload: CategoriesType;
+}
+export interface ISetFeedbackOrder {
+	type: ActionType.SET_FEEDBACK_ORDER;
+	payload: OrderFilterType;
+}
+export interface ISetUpvoteAction {
+	type: ActionType.SET_UPVOTE;
+}
+export interface ISetUpvoteCompleteAction {
+	type: ActionType.SET_UPVOTE_COMPLETE;
+}
+export interface ISetUpvoteErrorAction {
+	type: ActionType.SET_UPVOTE_ERROR;
+	payload: string;
 }
 
 // Comments

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { useUser } from "../../../hooks/useUser";
 import { ICommentReply } from "../../../interfaces";
-import AdLoginRequired from "../../auth/AdLoginRequired";
+import AuthModal from "../../auth/AuthModal";
 
 interface IAddCommentProps {
 	feedbackId: string;
@@ -29,7 +29,9 @@ const AddComment: React.FC<IAddCommentProps> = ({ feedbackId, commentReply }) =>
 		const productRequest = feedbackId;
 		const comment = commentReply ? commentReply.commentId : "";
 		const response = await createComment({ content, productRequest, comment });
-		setEnteredValue("");
+		setTimeout(() => {
+			setEnteredValue("");
+		}, 1000);
 	};
 
 	const replyTo = commentReply ? (
@@ -46,7 +48,7 @@ const AddComment: React.FC<IAddCommentProps> = ({ feedbackId, commentReply }) =>
 
 	return (
 		<>
-			{modal && <AdLoginRequired setModal={() => setModal(false)} />}
+			{modal && <AuthModal onClick={() => setModal(false)} />}
 			<section className="flex-c6 items-start bg-gray animate-fade">
 				<form onSubmit={(e) => submitHandler(e)} className="w-full flex-c6 p-6 bg-white rounded-lg">
 					<h2 className="w-full flex">Add Comment</h2>

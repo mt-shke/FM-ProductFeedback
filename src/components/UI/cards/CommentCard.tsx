@@ -30,7 +30,7 @@ const CommentCard: React.FC<ICommentCardProps> = ({
 		<>
 			{hr}
 			<article
-				className={`${subCommentLBorderMT} ${paddingLeft} relative flex flex-col gap-4 text-sm animate-fade`}
+				className={`${subCommentLBorderMT} ${paddingLeft} relative z-[1] flex flex-col gap-4 text-sm animate-fade`}
 			>
 				{isAuthor && <CommentCardDeleteButton commentToDelete={comment} />}
 				<div className="flex justify-start items-center">

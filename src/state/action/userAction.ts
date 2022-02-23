@@ -30,3 +30,15 @@ export interface ILoginUserActionError {
 	type: ActionType.LOGIN_USER_ERROR;
 	payload: string;
 }
+
+// Register
+export interface IRegisterUserAction {
+	type: ActionType.REGISTER_USER;
+}
+export interface IRegisterUserActionComplete {
+	type: ActionType.REGISTER_USER_COMPLETE;
+}
+export interface IRegisterUserActionError {
+	type: ActionType.REGISTER_USER_ERROR;
+	payload: string;
+}

@@ -14,8 +14,7 @@ redux
 
 ```js
 // comments update
-// auth
-// filtering
+// register
 // final mobile responsive && desktop
 ```
 

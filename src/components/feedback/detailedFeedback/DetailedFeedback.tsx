@@ -10,7 +10,7 @@ const DetailedFeedback: React.FC<IPageProps> = ({ data }) => {
 	const feedback = useTargetFeedback();
 	const { user } = data;
 	const commentReply = useCommentReply();
-	window.scrollTo(0, 0);
+	// window.scrollTo(0, 0);
 	return (
 		<main className="grid grid-flow-row gap-6 px-6 py-8 bg-gray">
 			<HeaderButtons feedback={feedback} user={user} />

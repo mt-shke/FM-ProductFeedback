@@ -12,7 +12,11 @@ import {
 	IDeleteFeedbackAction,
 	// Set target
 	ISetTargetFeedbackAction,
-
+	ISetFilterCategory,
+	ISetFeedbackOrder,
+	ISetUpvoteAction,
+	ISetUpvoteCompleteAction,
+	ISetUpvoteErrorAction,
 	// Comments
 	ISetCommentReply,
 	IResetCommentReply,
@@ -29,6 +33,9 @@ import {
 	IVerifyUserAction,
 	IVerifyUserCompleteAction,
 	IVerifyUserErrorAction,
+	IRegisterUserAction,
+	IRegisterUserActionComplete,
+	IRegisterUserActionError,
 } from "./userAction";
 
 export type Action =
@@ -40,11 +47,18 @@ export type Action =
 	| IFetchSingleFeedbackAction
 	| IFetchSingleFeedbackCompleteAction
 	| IFetchSingleFeedbackErrorAction
+	// Set target
+	| ISetTargetFeedbackAction
+	// Set filter
+	| ISetFilterCategory
+	| ISetFeedbackOrder
+	| ISetUpvoteAction
+	| ISetUpvoteCompleteAction
+	| ISetUpvoteErrorAction
 	// CRUD
 	| ICreateFeedbackAction
 	| IUpdateFeedbackAction
 	| IDeleteFeedbackAction
-	| ISetTargetFeedbackAction
 	// Comments
 	| ISetCommentReply
 	| IResetCommentReply
@@ -59,4 +73,7 @@ export type Action =
 	| ILoginUserActionError
 	| IVerifyUserAction
 	| IVerifyUserCompleteAction
-	| IVerifyUserErrorAction;
+	| IVerifyUserErrorAction
+	| IRegisterUserAction
+	| IRegisterUserActionComplete
+	| IRegisterUserActionError;

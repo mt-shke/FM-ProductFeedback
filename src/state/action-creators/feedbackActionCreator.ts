@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { IComment, ICreatedComment, IFeedback } from "../../interfaces";
+import { CategoriesType, IComment, ICreatedComment, IFeedback } from "../../interfaces";
 import { ICreatedFeedback, ICommentReply } from "../../interfaces";
+import { OrderFilterType } from "../../interfaces/feedbackInterface";
 import { API_URL, authAxios } from "../../utils";
 import { Action } from "../action";
 import { ActionType } from "../action-types";
@@ -103,6 +104,40 @@ export const deleteFeedback = (feedbackId: string) => {
 export const setTargetFeedback = (feedback: IFeedback) => {
 	return (dispatch: Dispatch<Action>) => {
 		dispatch({ type: ActionType.SET_TARGET_FEEDBACK, payload: feedback });
+	};
+};
+
+// Set filter
+export const setFilterCategory = (category: CategoriesType) => {
+	return (dispatch: Dispatch<Action>) => {
+		dispatch({ type: ActionType.SET_FILTER_CATEGORY, payload: category });
+	};
+};
+export const setFeedbackOrder = (orderFilterType: OrderFilterType) => {
+	return (dispatch: Dispatch<Action>) => {
+		dispatch({ type: ActionType.SET_FEEDBACK_ORDER, payload: orderFilterType });
+	};
+};
+
+// Upvotes
+
+export const setUpvote = (feedbackId: string) => {
+	return async (dispatch: Dispatch<Action>) => {
+		dispatch({ type: ActionType.SET_UPVOTE });
+		try {
+			const response = await authAxios.post(`/product-requests/${feedbackId}/setupvote`);
+			if (response) {
+				dispatch({ type: ActionType.SET_UPVOTE_COMPLETE });
+				return response;
+			} else {
+				dispatch({ type: ActionType.SET_UPVOTE_ERROR, payload: "Cannot set upvote" });
+				return response;
+			}
+
+			return;
+		} catch (error: any) {
+			dispatch({ type: ActionType.SET_UPVOTE_ERROR, payload: error.errorMessage });
+		}
 	};
 };
 

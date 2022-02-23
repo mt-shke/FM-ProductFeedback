@@ -5,7 +5,7 @@ import { useTypedSelector } from "./useTypedSelector";
 export const useFeedback = () => {
 	const [isUpdated, setIsUpdated] = useState(false);
 	const { fetchFeedbacks } = useActions();
-	const { data, loading, targetFeedback } = useTypedSelector((state) => state.feedbacks);
+	const { data, loading, targetFeedback, categoryFilter } = useTypedSelector((state) => state.feedbacks);
 	useEffect(() => {
 		if (!isUpdated) {
 			fetchFeedbacks();
@@ -16,5 +16,5 @@ export const useFeedback = () => {
 		if (loading) return;
 		fetchFeedbacks();
 	}, [data]);
-	return { data, targetFeedback };
+	return { data, targetFeedback, categoryFilter };
 };

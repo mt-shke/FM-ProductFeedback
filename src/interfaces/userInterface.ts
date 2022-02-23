@@ -19,3 +19,9 @@ export interface IuserCredentials {
 	email: string;
 	password: string;
 }
+
+export interface INewUser {
+	email: string;
+	password: string;
+	username: string;
+}

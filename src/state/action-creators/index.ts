@@ -2,6 +2,9 @@ import {
 	createFeedback,
 	fetchFeedbacks,
 	setTargetFeedback,
+	setFilterCategory,
+	setFeedbackOrder,
+	setUpvote,
 	fetchSingleFeedbackAction,
 	updateFeedback,
 	deleteFeedback,
@@ -11,12 +14,15 @@ import {
 	deleteComment,
 } from "./feedbackActionCreator";
 
-import { loginUser, verifyUserCookie } from "./userActionCreator";
+import { loginUser, verifyUserCookie, registerUser } from "./userActionCreator";
 
 export {
 	createFeedback,
 	fetchFeedbacks,
 	setTargetFeedback,
+	setFilterCategory,
+	setFeedbackOrder,
+	setUpvote,
 	updateFeedback,
 	deleteFeedback,
 	fetchSingleFeedbackAction,
@@ -27,4 +33,5 @@ export {
 	// user
 	loginUser,
 	verifyUserCookie,
+	registerUser,
 };

@@ -45,7 +45,7 @@ const FeedbackForm: React.FC<IFeedbackFormProps> = ({ data, edit }) => {
 
 	return (
 		<form
-			onSubmit={(e) => submitHandler(e, edit ? "edit" : "add")}
+			onSubmit={(e) => submitHandler(e, edit ? "edit" : "create")}
 			className="relative w-full flex flex-col gap-6 p-6 pt-16 bg-white rounded-lg"
 		>
 			<span className="absolute -top-6 h-12 aspect-square">
