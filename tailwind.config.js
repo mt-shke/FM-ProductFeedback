@@ -27,6 +27,7 @@ module.exports = {
 			fade: "fadeIn .3s ease-in",
 			fade5: "fadeIn .3s ease-out",
 			fadeOut: "fadeOut 1.5s ease-out",
+			fadeOut1: "fadeOut .2s ease-out",
 			move: "move .5s ease-out",
 		},
 		keyframes: {
