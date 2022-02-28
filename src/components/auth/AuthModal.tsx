@@ -14,11 +14,11 @@ const AuthModal: React.FC<IAuthModalProps> = ({ onClick }) => {
 	const navigate = useNavigate();
 
 	const setUserLoggedIn = () => {
-		setIsLoggedIn(true);
+		// setIsLoggedIn(true);
 		setTimeout(() => {
 			onClick();
 			navigate("/reload");
-		}, 1400);
+		}, 500);
 	};
 
 	const onClickHandler = (e: React.MouseEvent) => {
@@ -35,7 +35,7 @@ const AuthModal: React.FC<IAuthModalProps> = ({ onClick }) => {
 				isLoggedIn ? "animate-fadeOut" : "animate-fade"
 			} `}
 		>
-			{isLoggedIn && <LoggedIn />}
+			{/* {isLoggedIn && <LoggedIn />} */}
 			{!isLoggedIn && !register && (
 				<Login onLogin={setUserLoggedIn} onSwitchRegister={() => setRegister(true)} />
 			)}

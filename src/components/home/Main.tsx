@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFeedback } from "../../hooks/useFeedback";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import useViewport from "../../hooks/useViewport";
@@ -9,12 +9,14 @@ import HeaderBar from "./HeaderBar";
 import NoFeedBack from "./NoFeedback";
 
 const Main: React.FC<IPageProps> = ({ data }) => {
+	const { data: updatedUser } = useTypedSelector((state) => state.user);
+	const [user, setUpdate] = useState(updatedUser);
+
 	const feedbacks = data.feedbacks?.feedbacks;
 	const { data: updatedFeedbacks } = useFeedback();
 	const viewport = useViewport();
 	const isMobile = viewport === "mobile";
-	useEffect(() => {}, [updatedFeedbacks]);
-	const { data: updatedUser } = useTypedSelector((state) => state.user);
+	useEffect(() => {}, [updatedFeedbacks, user]);
 
 	if (updatedFeedbacks)
 		return (

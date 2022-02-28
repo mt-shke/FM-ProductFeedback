@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { IPageProps } from "../../../interfaces";
 import NavMenu from "./nav/NavMenu";
 
@@ -16,7 +17,9 @@ const Header: React.FC<IPageProps> = ({ data }) => {
 					/>
 				</div>
 				<div>
-					<h3 className="text-s-white">Frontend Mentor</h3>
+					<Link to="/">
+						<h3 className="text-s-white">Frontend Mentor</h3>
+					</Link>
 					<span className="text-gray">Feedback Board</span>
 				</div>
 				{!modal && (

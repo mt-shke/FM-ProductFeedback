@@ -34,6 +34,7 @@ const Login: React.FC<ILoginProps> = ({ onLogin, addFeedback, onSwitchRegister }
 			return;
 		}
 		if (success) {
+			// setCustomMessage("Sorry: disabled for now, we are currently working on it!" as string, setErrorMessage);
 			if (addFeedback) navigate("/create-feedback");
 			onLogin();
 		}

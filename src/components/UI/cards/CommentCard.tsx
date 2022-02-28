@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useViewport from "../../../hooks/useViewport";
 import { useUser } from "../../../hooks/useUser";
 import { IComment } from "../../../interfaces";
@@ -26,7 +25,7 @@ const CommentCard: React.FC<ICommentCardProps> = ({
 	const user = useUser();
 	const isAuthor = user && user.userId === comment.user._id;
 
-	// Styling
+	// Conditionnal Styling : subComment & firstIndex
 	const hr = index >= 1 && !isSubcomment ? <hr className="opacity-20" /> : "";
 	const leftBorder = index === 0 && isSubcomment ? "border-l-[1px] border-l-s-gray mt-4" : "";
 	const paddingLeft = isSubcomment ? "pl-4 my-2" : "";

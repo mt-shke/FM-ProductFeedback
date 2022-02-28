@@ -2,9 +2,13 @@ import { useNavigate } from "react-router-dom";
 
 const Reload: React.FC = () => {
 	const navigate = useNavigate();
-	setTimeout(() => {
-		navigate(-1);
-	}, 2000);
+
+	const goHome = () =>
+		setTimeout(() => {
+			navigate("/");
+		}, 1000);
+
+	goHome();
 
 	return (
 		<div className="w-screen h-screen gridc">

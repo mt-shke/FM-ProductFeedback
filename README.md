@@ -2,7 +2,7 @@
 <summary>Todo</summary>
 
 ```js
-// fix bugs && enable registering
+// fix bugs, auth & enable registering
 ```
 
 </details>
