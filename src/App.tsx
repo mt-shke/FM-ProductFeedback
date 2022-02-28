@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Reload from "./components/home/Reload";
 import { useFeedback } from "./hooks/useFeedback";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import { useUser } from "./hooks/useUser";
@@ -20,6 +21,7 @@ const App: React.FC<{}> = () => {
 				<BrowserRouter>
 					<Routes>
 						<Route path="/" element={<HomePage data={data} />} />
+						<Route path="/reload" element={<Reload />} />
 						<Route path="/feedback/:id" element={<DetailedFeedbackPage data={data} />} />
 						<Route path="/edit-feedback/:id" element={<EditFeedbackPage data={data} />} />
 						<Route path="/create-feedback" element={<CreateFeedbackPage data={data} />} />
@@ -29,7 +31,11 @@ const App: React.FC<{}> = () => {
 			</div>
 		);
 
-	return <div></div>;
+	return (
+		<div className="w-screen h-screen gridc">
+			<div className="h-20 aspect-square rounded-full border-t-4 border-blue animate-spinning"></div>;
+		</div>
+	);
 };
 
 export default App;

@@ -2,7 +2,9 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
 import { useUser } from "../../hooks/useUser";
-import { IPromiseSuccess } from "../../interfaces/promiseInterface";
+import { IPromise } from "../../interfaces/promiseInterface";
+import { setCustomMessage } from "../../utils";
+import ModalMessage from "./ModalMessage";
 
 interface ILoginProps {
 	onLogin: () => void;
@@ -11,7 +13,7 @@ interface ILoginProps {
 }
 
 const Login: React.FC<ILoginProps> = ({ onLogin, addFeedback, onSwitchRegister }) => {
-	const [errorMessage, setMsgFunctionMessage] = useState<string>("");
+	const [errorMessage, setErrorMessage] = useState<string>("");
 	const emailRef = useRef<HTMLInputElement | null>(null);
 	const passwordRef = useRef<HTMLInputElement | null>(null);
 	const { loginUser } = useActions();
@@ -23,12 +25,12 @@ const Login: React.FC<ILoginProps> = ({ onLogin, addFeedback, onSwitchRegister }
 		const email = emailRef.current?.value.toString() as string;
 		const password = passwordRef.current?.value.toString() as string;
 		if (email.trim() === "" || password.trim() === "") {
-			setMsgFunctionMessage("Please enter correct email and password");
+			setCustomMessage("Please enter a correct email and password", setErrorMessage);
 			return;
 		}
-		const { success } = (await loginUser({ email, password })) as IPromiseSuccess;
+		const { success, message } = (await loginUser({ email, password })) as IPromise;
 		if (!success) {
-			setMsgFunctionMessage("Please enter correct email and password");
+			setCustomMessage("Please enter a correct email and password" as string, setErrorMessage);
 			return;
 		}
 		if (success) {
@@ -38,47 +40,50 @@ const Login: React.FC<ILoginProps> = ({ onLogin, addFeedback, onSwitchRegister }
 	};
 
 	return (
-		<form
-			className="w-full flex-c6 items-center p-8 bg-white text-s-grey opacity-100 rounded-lg  md:max-w-[600px]"
-			onSubmit={(e) => submitHandler(e)}
-		>
-			<label className="w-full" htmlFor="email">
-				<h2>Email</h2>
-				<input
-					ref={emailRef}
-					className="w-full bg-gray rounded-lg"
-					type="text"
-					id="email"
-					name="email"
-					placeholder="john@doe.com"
-				/>
-			</label>
-			<label className="w-full" htmlFor="password">
-				<h2>Password</h2>
-				<input
-					ref={passwordRef}
-					className="w-full bg-gray rounded-lg"
-					type="password"
-					id="password"
-					name="password"
-					placeholder="johndoe"
-				/>
-			</label>
-			<button
-				onClick={(e) => submitHandler(e)}
-				className="w-fit px-4 py-2 text-white bg-blue rounded-lg"
-				type="submit"
+		<>
+			<form
+				className="w-full flex-c6 items-center p-8 bg-white text-s-grey opacity-100 rounded-lg  md:max-w-[600px]"
+				onSubmit={(e) => submitHandler(e)}
 			>
-				Login
-			</button>
-			<button
-				onClick={onSwitchRegister}
-				className="w-fit px-4 py-2 text-white bg-orange rounded-lg"
-				type="button"
-			>
-				Create Account
-			</button>
-		</form>
+				<label className="w-full" htmlFor="email">
+					<h2>Email</h2>
+					<input
+						ref={emailRef}
+						className="w-full bg-gray rounded-lg"
+						type="text"
+						id="email"
+						name="email"
+						placeholder="john@doe.com"
+					/>
+				</label>
+				<label className="w-full" htmlFor="password">
+					<h2>Password</h2>
+					<input
+						ref={passwordRef}
+						className="w-full bg-gray rounded-lg"
+						type="password"
+						id="password"
+						name="password"
+						placeholder="johndoe"
+					/>
+				</label>
+				<button
+					onClick={(e) => submitHandler(e)}
+					className="w-fit px-4 py-2 text-white bg-blue rounded-lg"
+					type="submit"
+				>
+					Login
+				</button>
+				<button
+					onClick={onSwitchRegister}
+					className="w-fit px-4 py-2 text-white bg-orange rounded-lg"
+					type="button"
+				>
+					Create Account
+				</button>
+			</form>
+			{errorMessage && <ModalMessage message={errorMessage} />}
+		</>
 	);
 };
 

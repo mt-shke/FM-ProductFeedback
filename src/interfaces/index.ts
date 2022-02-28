@@ -12,7 +12,7 @@ import { IPageProps } from "./pageInterface";
 import IRoute from "./route";
 import { ReactNode } from "react";
 import { IUser, IUserState, IuserCredentials, INewUser } from "./userInterface";
-import { IPromisePath, IPromiseSuccess } from "./promiseInterface";
+import { IPromisePath, IPromise } from "./promiseInterface";
 
 interface IComponent {
 	children?: ReactNode;

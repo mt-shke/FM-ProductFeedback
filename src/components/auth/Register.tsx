@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { INewUser } from "../../interfaces";
-import { setMsgFunction, validateEmail } from "../../utils";
+import { setCustomMessage, validateEmail } from "../../utils";
 import ModalMessage from "./ModalMessage";
 
 const Register: React.FC<{}> = () => {
@@ -21,28 +21,28 @@ const Register: React.FC<{}> = () => {
 		const username = usernameRef.current?.value.toString().trim();
 
 		if (!email || !password || !username) {
-			setMsgFunction("Please enter required field", setMsg);
+			setCustomMessage("Please enter required field", setMsg);
 			return;
 		}
 
 		if (!validateEmail(email)) {
-			setMsgFunction("Please provid valid email", setMsg);
+			setCustomMessage("Please provid valid email", setMsg);
 			return;
 		}
 
 		if (password.length < 6 || username?.length < 6) {
-			setMsgFunction("Please enter valid values - 6 characters minimum", setMsg);
+			setCustomMessage("Please enter valid values - 6 characters minimum", setMsg);
 			return;
 		}
 
 		const newUser: INewUser = { email, password, username };
 		// const response = await registerUser(newUser);
 		// if (error) {
-		// 	setMsgFunction(error, setMsg);
+		// 	setCustomMessage(error, setMsg);
 		// 	return;
 		// }
 		// if (response.success) {
-		// 	setMsgFunction("Please check your email and activate your account before posting", setMsg)
+		// 	setCustomMessage("Please check your email and activate your account before posting", setMsg)
 
 		// }
 	};

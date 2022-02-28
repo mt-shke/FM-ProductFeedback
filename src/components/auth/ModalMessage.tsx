@@ -4,8 +4,8 @@ interface IModalMessageProps {
 
 const ModalMessage: React.FC<IModalMessageProps> = ({ message }) => {
 	return (
-		<div className="fixed z-50 inset-0 px-6 gridc text-s-white bg-transparent-g animate-fade  md:max-w-[600px]">
-			<p className="w-full flex-c6 items-center py-4 px-6 bg-white text-s-grey opacity-100 rounded-lg authForm">
+		<div className="fixed z-50 inset-0 px-6 gridc text-s-white bg-transparent-g animate-fade  ">
+			<p className="w-full flex-c6 items-center py-4 px-6 bg-white text-s-grey opacity-100 rounded-lg authForm md:max-w-[800px]">
 				{message}
 			</p>
 		</div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useUser } from "../../../hooks/useUser";
-import { IPromiseSuccess } from "../../../interfaces/promiseInterface";
+import { IPromise } from "../../../interfaces/promiseInterface";
 import ArrowButton from "./ArrowButton";
 import Button from "./Button";
 
@@ -35,7 +35,7 @@ const UpvotesButton: React.FC<IUpvotesButtonProps> = ({
 	const upvoteButtonHandler = async () => {
 		if (!user) return;
 		if (loading) return;
-		const { success } = (await setUpvote(feedbackId)) as IPromiseSuccess;
+		const { success } = (await setUpvote(feedbackId)) as IPromise;
 		if (success) {
 			const totalSum = isUpvoter ? -1 : 1;
 			setIsUpvoter((p) => !p);

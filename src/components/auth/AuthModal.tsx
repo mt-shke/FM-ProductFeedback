@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import LoggedIn from "./login/LoggedIn";
 import Register from "./Register";
@@ -10,12 +11,13 @@ interface IAuthModalProps {
 const AuthModal: React.FC<IAuthModalProps> = ({ onClick }) => {
 	const [register, setRegister] = useState(false);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const navigate = useNavigate();
 
 	const setUserLoggedIn = () => {
 		setIsLoggedIn(true);
-		window.location.reload();
 		setTimeout(() => {
 			onClick();
+			navigate("/reload");
 		}, 1400);
 	};
 

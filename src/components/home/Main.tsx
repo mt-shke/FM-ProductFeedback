@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFeedback } from "../../hooks/useFeedback";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import useViewport from "../../hooks/useViewport";

@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { CategoriesType, IComment, ICreatedComment, IFeedback } from "../../interfaces";
 import { ICreatedFeedback, ICommentReply } from "../../interfaces";
 import { OrderFilterType } from "../../interfaces/feedbackInterface";
-import { IPromisePath, IPromiseSuccess } from "../../interfaces/promiseInterface";
+import { IPromisePath, IPromise } from "../../interfaces/promiseInterface";
 import { API_URL, authAxios } from "../../utils";
 import { Action } from "../action";
 import { ActionType } from "../action-types";
@@ -89,7 +89,7 @@ export const updateFeedback = (feedback: ICreatedFeedback) => {
 };
 
 export const deleteFeedback = (feedbackId: string) => {
-	return async (dispatch: Dispatch<Action>): Promise<IPromiseSuccess> => {
+	return async (dispatch: Dispatch<Action>): Promise<IPromise> => {
 		try {
 			const response = await authAxios.delete("/product-requests/" + feedbackId);
 			if (response) {
@@ -129,7 +129,7 @@ export const setFeedbackOrder = (orderFilterType: OrderFilterType) => {
 // Upvotes
 
 export const setUpvote = (feedbackId: string) => {
-	return async (dispatch: Dispatch<Action>): Promise<IPromiseSuccess> => {
+	return async (dispatch: Dispatch<Action>): Promise<IPromise> => {
 		dispatch({ type: ActionType.SET_UPVOTE });
 		try {
 			const response = await authAxios.post(`/product-requests/${feedbackId}/setupvote`);

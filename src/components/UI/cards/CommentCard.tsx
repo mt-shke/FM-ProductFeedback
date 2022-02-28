@@ -28,19 +28,18 @@ const CommentCard: React.FC<ICommentCardProps> = ({
 
 	// Styling
 	const hr = index >= 1 && !isSubcomment ? <hr className="opacity-20" /> : "";
-	const subCommentLBorderMT = index === 0 && isSubcomment ? "border-l-[1px] border-l-s-gray mt-4" : "";
+	const leftBorder = index === 0 && isSubcomment ? "border-l-[1px] border-l-s-gray mt-4" : "";
 	const paddingLeft = isSubcomment ? "pl-4 my-2" : "";
 
 	// Viewport check
 	const viewport = useViewport();
 	const isMobile = viewport === "mobile";
-	console.log(comment._id);
 	if (isMobile) {
 		return (
 			<>
 				{hr}
 				<article
-					className={`${subCommentLBorderMT} ${paddingLeft} relative z-[1] flex flex-col gap-4 text-sm animate-fade`}
+					className={`${leftBorder} ${paddingLeft} relative z-[1] flex flex-col gap-4 text-sm animate-fade`}
 				>
 					{isAuthor && <CommentCardDeleteButton commentToDelete={comment} />}
 					<div className="flex justify-start items-center">
@@ -72,7 +71,7 @@ const CommentCard: React.FC<ICommentCardProps> = ({
 		<>
 			{hr}
 			<article
-				className={`${subCommentLBorderMT} ${paddingLeft} relative z-[1] flex flex-col gap-4 text-sm animate-fade`}
+				className={`${leftBorder} ${paddingLeft} relative z-[1] flex flex-col gap-4 text-sm animate-fade`}
 			>
 				<div className="relative flex items-center justify-start">
 					{isAuthor && <CommentCardDeleteButton commentToDelete={comment} />}

@@ -14,9 +14,9 @@ export const validateEmail = (email: string) => {
 	return text.test(String(email).toLowerCase());
 };
 
-export const setMsgFunction = (message: string, setMessageFunction: (string: string | false) => void) => {
-	setMessageFunction(message);
+export const setCustomMessage = (message: string, setFunction: (string: string) => void) => {
+	setFunction(message);
 	setTimeout(() => {
-		setMessageFunction(false);
+		setFunction("");
 	}, 2000);
 };
