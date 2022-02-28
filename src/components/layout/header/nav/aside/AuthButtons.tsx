@@ -9,9 +9,11 @@ const AuthButtons: React.FC = () => {
 	const [modal, setModal] = useState(false);
 	const { logoutUser } = useActions();
 
-	const logoutHandler = () => {
-		logoutUser();
-		window.location.reload();
+	const logoutHandler = async () => {
+		const { success }: any = await logoutUser();
+		if (success) {
+			window.location.reload();
+		}
 	};
 
 	return (

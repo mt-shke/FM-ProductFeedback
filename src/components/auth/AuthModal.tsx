@@ -13,6 +13,7 @@ const AuthModal: React.FC<IAuthModalProps> = ({ onClick }) => {
 
 	const setUserLoggedIn = () => {
 		setIsLoggedIn(true);
+		window.location.reload();
 		setTimeout(() => {
 			onClick();
 		}, 1400);

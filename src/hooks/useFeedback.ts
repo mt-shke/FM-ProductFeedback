@@ -6,6 +6,7 @@ export const useFeedback = () => {
 	const [isUpdated, setIsUpdated] = useState(false);
 	const { fetchFeedbacks } = useActions();
 	const { data, loading, targetFeedback, categoryFilter } = useTypedSelector((state) => state.feedbacks);
+
 	useEffect(() => {
 		if (!isUpdated) {
 			fetchFeedbacks();

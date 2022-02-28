@@ -3,6 +3,7 @@ import { Dispatch } from "redux";
 import { CategoriesType, IComment, ICreatedComment, IFeedback } from "../../interfaces";
 import { ICreatedFeedback, ICommentReply } from "../../interfaces";
 import { OrderFilterType } from "../../interfaces/feedbackInterface";
+import { IPromisePath, IPromiseSuccess } from "../../interfaces/promiseInterface";
 import { API_URL, authAxios } from "../../utils";
 import { Action } from "../action";
 import { ActionType } from "../action-types";
@@ -48,54 +49,60 @@ export const fetchSingleFeedbackAction = (id: string) => {
 // CRUD
 
 export const createFeedback = (feedback: ICreatedFeedback) => {
-	return async (dispatch: Dispatch<Action>) => {
+	return async (dispatch: Dispatch<Action>): Promise<IPromisePath> => {
 		try {
 			const response = await authAxios.post("/product-requests", feedback);
 			if (response.data.success) {
 				const data = await axios.get(API_URL + "/product-requests/" + response.data.request._id);
 				const request: IFeedback = data.data.request;
 				dispatch({ type: ActionType.CREATE_FEEDBACK, payload: request });
-				return data;
+				return { success: true, path: request._id };
+			} else {
+				return { success: false };
 			}
 		} catch (error) {
 			console.log(error);
+			return { success: false };
 		}
 	};
 };
 
 export const updateFeedback = (feedback: ICreatedFeedback) => {
-	return async (dispatch: Dispatch<Action>) => {
+	return async (dispatch: Dispatch<Action>): Promise<IPromisePath> => {
 		try {
-			const { feedbackId, title, category, description } = feedback;
+			const { feedbackId, title, category, description, status } = feedback;
 			const response = await authAxios.patch("/product-requests/" + feedbackId, feedback);
 			if (response) {
 				dispatch({
 					type: ActionType.UPDATE_FEEDBACK,
 					payload: response.data.request,
 				});
-				return feedbackId;
+				return { success: true, path: feedbackId };
+			} else {
+				return { success: false };
 			}
 		} catch (error) {
 			console.log(error);
+			return { success: false };
 		}
 	};
 };
 
 export const deleteFeedback = (feedbackId: string) => {
-	return async (dispatch: Dispatch<Action>) => {
+	return async (dispatch: Dispatch<Action>): Promise<IPromiseSuccess> => {
 		try {
 			const response = await authAxios.delete("/product-requests/" + feedbackId);
 			if (response) {
 				const data = await axios.get(API_URL + "/product-requests");
 				const requests: IFeedback[] = data.data.requests;
 				dispatch({ type: ActionType.DELETE_FEEDBACK, payload: requests });
-				return { success: true, message: "Feedback deleted" };
-			}
-			if (!response) {
-				return { success: false, message: "Something went wrong when deleting feedback" };
+				return { success: true };
+			} else {
+				return { success: false };
 			}
 		} catch (error) {
 			console.log(error);
+			return { success: false };
 		}
 	};
 };
@@ -122,21 +129,21 @@ export const setFeedbackOrder = (orderFilterType: OrderFilterType) => {
 // Upvotes
 
 export const setUpvote = (feedbackId: string) => {
-	return async (dispatch: Dispatch<Action>) => {
+	return async (dispatch: Dispatch<Action>): Promise<IPromiseSuccess> => {
 		dispatch({ type: ActionType.SET_UPVOTE });
 		try {
 			const response = await authAxios.post(`/product-requests/${feedbackId}/setupvote`);
 			if (response) {
 				dispatch({ type: ActionType.SET_UPVOTE_COMPLETE });
-				return response;
+				await fetchSingleFeedbackAction(feedbackId);
+				return { success: true };
 			} else {
 				dispatch({ type: ActionType.SET_UPVOTE_ERROR, payload: "Cannot set upvote" });
-				return response;
+				return { success: false };
 			}
-
-			return;
 		} catch (error: any) {
 			dispatch({ type: ActionType.SET_UPVOTE_ERROR, payload: error.errorMessage });
+			return { success: false };
 		}
 	};
 };

@@ -6,11 +6,11 @@ import { useTypedSelector } from "./useTypedSelector";
 export const useUser = () => {
 	const { data, loading, verified } = useTypedSelector((state) => state.user);
 	const { verifyUserCookie } = useActions();
-
 	useEffect(() => {
 		if (verified) return;
 		if (data !== null) return;
 		if (loading) return;
+
 		verifyUserCookie();
 	});
 

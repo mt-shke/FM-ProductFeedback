@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { IPageProps, StatusType } from "../../../interfaces";
+import { IPromisePath } from "../../../interfaces/promiseInterface";
 import EditButtons from "../editFeedback/EditButtons";
 
 interface IFeedbackFormProps extends IPageProps {
@@ -33,22 +34,31 @@ const FeedbackForm: React.FC<IFeedbackFormProps> = ({ data, edit }) => {
 			return;
 		}
 		if (eventType === "create") {
-			const response = await createFeedback({ title, category, description });
-			navigate("/feedback/" + response);
-			return;
+			const { success, path } = (await createFeedback({ title, category, description })) as IPromisePath;
+			if (success) {
+				navigate("/feedback/" + path);
+				return;
+			}
 		}
 
 		if (edit && eventType === "edit") {
 			const status = statusRef.current?.value.toString().trim() as StatusType;
-			const response = await updateFeedback({
+			const { success, path } = (await updateFeedback({
 				title,
 				category,
 				status,
 				description,
 				feedbackId: feedback?._id,
-			});
-			navigate("/feedback/" + response);
-			return;
+			})) as IPromisePath;
+
+			if (success) {
+				setTimeout(() => {
+					// navigate("/feedback/" + path);
+					navigate("/");
+
+					return;
+				}, 500);
+			}
 		}
 	};
 

@@ -25,7 +25,12 @@ const feedbackReducer = (state: IFeedbackState = initialState, action: Action) =
 		case ActionType.FETCH_SINGLE_FEEDBACK:
 			return { ...state, loading: true, error: null };
 		case ActionType.FETCH_SINGLE_FEEDBACK_COMPLETE:
-			return { ...state, loading: false, targetFeedback: action.payload };
+			let updatedFeebacks;
+			if (state.data) {
+				const index = state.data.findIndex((fb) => fb._id === action.payload._id);
+				updatedFeebacks = [...state.data].map((fb, ind) => (ind === index ? action.payload : fb));
+			}
+			return { ...state, data: updatedFeebacks, loading: false, targetFeedback: action.payload };
 		case ActionType.FETCH_SINGLE_FEEDBACK_ERROR:
 			return { ...state, loading: false, error: action.payload.errorMessage };
 

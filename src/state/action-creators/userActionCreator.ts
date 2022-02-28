@@ -3,6 +3,7 @@ import { INewUser, IuserCredentials } from "../../interfaces";
 import { ActionType } from "../action-types";
 import { Action } from "../action";
 import { authAxios } from "../../utils";
+import { IPromiseSuccess } from "../../interfaces/promiseInterface";
 
 export const verifyUserCookie = () => {
 	return async (dispatch: Dispatch<Action>) => {
@@ -17,18 +18,18 @@ export const verifyUserCookie = () => {
 };
 
 export const loginUser = (credentials: IuserCredentials) => {
-	return async (dispatch: Dispatch<Action>) => {
+	return async (dispatch: Dispatch<Action>): Promise<IPromiseSuccess> => {
 		dispatch({ type: ActionType.LOGIN_USER });
 		try {
 			const data = await authAxios.post("/auth/login", credentials);
 			dispatch({ type: ActionType.LOGIN_USER_COMPLETE, payload: data.data.user });
 			if (data.data.success === true) {
-				return { succes: true };
+				return { success: true };
 			}
-			return { succes: false };
+			return { success: false };
 		} catch (error: any) {
 			dispatch({ type: ActionType.LOGIN_USER_ERROR, payload: error.errorMessage as string });
-			return { succes: false };
+			return { success: false };
 		}
 	};
 };
@@ -36,36 +37,40 @@ export const loginUser = (credentials: IuserCredentials) => {
 export const registerUser = (newUser: INewUser) => {
 	const { email, password, username } = newUser;
 
-	return async (dispatch: Dispatch<Action>): Promise<{ success: boolean }> => {
+	return async (dispatch: Dispatch<Action>): Promise<any> => {
 		dispatch({ type: ActionType.REGISTER_USER });
 		try {
 			const data = await authAxios.post("/auth/register", newUser);
 			if (data.data.success === true) {
 				dispatch({ type: ActionType.REGISTER_USER_COMPLETE });
-				return { success: true };
+				return data;
 			}
-			return { success: false };
+			return data;
 		} catch (error: any) {
 			console.error(JSON.parse(JSON.stringify(error)));
 			dispatch({ type: ActionType.REGISTER_USER_ERROR, payload: error.errorMessage as string });
-			return { success: false };
+			return error;
 		}
 	};
 };
 
 export const logoutUser = () => {
-	return async (dispatch: Dispatch<Action>): Promise<{ success: boolean }> => {
+	return async (dispatch: Dispatch<Action>): Promise<any> => {
 		dispatch({ type: ActionType.REGISTER_USER });
 		try {
 			const data = await authAxios.post("/auth/logout");
+			console.log(data);
 			if (data.data.success === true) {
 				dispatch({ type: ActionType.LOGOUT_USER });
 				return { success: true };
+			} else {
+				return {
+					success: false,
+				};
 			}
-			return { success: false };
 		} catch (error: any) {
 			console.error(JSON.parse(JSON.stringify(error)));
-			return { success: false };
+			return error;
 		}
 	};
 };

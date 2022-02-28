@@ -12,11 +12,17 @@ const CommentsList: React.FC<ICommentsListProps> = ({ list }) => {
 
 	const subComments = [...sorted].filter((comm) => comm.comment);
 	const feedbackReplies = [...sorted].filter((comm) => !comm.comment);
+
 	return (
 		<section className="grid grid-flow-row gap-6 items-start animate-fade">
 			{feedbackReplies.map((commentItem: IComment, index: number) => {
 				return (
-					<CommentCard comment={commentItem} index={index} key={commentItem._id} subComments={subComments} />
+					<CommentCard
+						comment={commentItem}
+						index={index}
+						key={index + commentItem._id}
+						subComments={subComments}
+					/>
 				);
 			})}
 		</section>

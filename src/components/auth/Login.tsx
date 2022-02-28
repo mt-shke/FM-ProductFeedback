@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
 import { useUser } from "../../hooks/useUser";
+import { IPromiseSuccess } from "../../interfaces/promiseInterface";
 
 interface ILoginProps {
 	onLogin: () => void;
@@ -25,13 +26,15 @@ const Login: React.FC<ILoginProps> = ({ onLogin, addFeedback, onSwitchRegister }
 			setMsgFunctionMessage("Please enter correct email and password");
 			return;
 		}
-		const response = await loginUser({ email, password });
-		if (!response) {
+		const { success } = (await loginUser({ email, password })) as IPromiseSuccess;
+		if (!success) {
 			setMsgFunctionMessage("Please enter correct email and password");
 			return;
 		}
-		if (addFeedback) navigate("/create-feedback");
-		onLogin();
+		if (success) {
+			if (addFeedback) navigate("/create-feedback");
+			onLogin();
+		}
 	};
 
 	return (

@@ -24,16 +24,18 @@ const CommentCard: React.FC<ICommentCardProps> = ({
 	replyToUsername,
 }) => {
 	const user = useUser();
+	const isAuthor = user && user.userId === comment.user._id;
 
+	// Styling
 	const hr = index >= 1 && !isSubcomment ? <hr className="opacity-20" /> : "";
 	const subCommentLBorderMT = index === 0 && isSubcomment ? "border-l-[1px] border-l-s-gray mt-4" : "";
 	const paddingLeft = isSubcomment ? "pl-4 my-2" : "";
-	const isAuthor = user && user.userId === comment.user._id;
 
+	// Viewport check
 	const viewport = useViewport();
 	const isMobile = viewport === "mobile";
-
-	if (isMobile)
+	console.log(comment._id);
+	if (isMobile) {
 		return (
 			<>
 				{hr}
@@ -53,7 +55,7 @@ const CommentCard: React.FC<ICommentCardProps> = ({
 						?.filter((subComment) => subComment.comment === comment._id)
 						.map((filteredComment, index) => (
 							<CommentCard
-								key={filteredComment._id}
+								key={filteredComment._id + index}
 								comment={filteredComment}
 								index={index}
 								subComments={subComments}
@@ -64,6 +66,7 @@ const CommentCard: React.FC<ICommentCardProps> = ({
 				</article>
 			</>
 		);
+	}
 
 	return (
 		<>
@@ -90,7 +93,7 @@ const CommentCard: React.FC<ICommentCardProps> = ({
 						?.filter((subComment) => subComment.comment === comment._id)
 						.map((filteredComment, index) => (
 							<CommentCard
-								key={filteredComment._id}
+								key={filteredComment._id + index}
 								comment={filteredComment}
 								index={index}
 								subComments={subComments}
