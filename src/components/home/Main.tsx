@@ -10,13 +10,11 @@ import NoFeedBack from "./NoFeedback";
 
 const Main: React.FC<IPageProps> = ({ data }) => {
 	const { data: updatedUser } = useTypedSelector((state) => state.user);
-	const [user, setUpdate] = useState(updatedUser);
-
 	const feedbacks = data.feedbacks?.feedbacks;
 	const { data: updatedFeedbacks } = useFeedback();
 	const viewport = useViewport();
 	const isMobile = viewport === "mobile";
-	useEffect(() => {}, [updatedFeedbacks, user]);
+	useEffect(() => {}, [updatedFeedbacks, updatedUser]);
 
 	if (updatedFeedbacks)
 		return (
