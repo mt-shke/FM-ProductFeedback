@@ -1,4 +1,3 @@
-import { loadavg } from "os";
 import { IFeedback, IFeedbackState } from "../../interfaces";
 import { Action } from "../action";
 import { ActionType } from "../action-types";

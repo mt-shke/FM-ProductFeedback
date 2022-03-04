@@ -20,3 +20,16 @@ export const setCustomMessage = (message: string, setFunction: (string: string) 
 		setFunction("");
 	}, 2000);
 };
+
+// API_URL = "/api/v1";
+// forwardedHost: "localhost:3000"
+// forwardedProtocol: "https"
+// host: "fm-pfeedback-api.herokuapp.com"
+// origin: "https://fm-pfeedback-api.herokuapp.com"
+// protocol: "http"
+
+// API_URL = "https://fm-pfeedback-api.herokuapp.com/api/v1";
+// forwardedProtocol: "https"
+// host: "fm-pfeedback-api.herokuapp.com"
+// origin: "http://localhost:3000"
+// protocol: "http"

@@ -25,6 +25,9 @@ export const loginUser = (credentials: IuserCredentials) => {
 		dispatch({ type: ActionType.LOGIN_USER });
 		try {
 			const response = await authAxios.post("/auth/login", credentials);
+
+			console.log(response);
+
 			dispatch({ type: ActionType.LOGIN_USER_COMPLETE, payload: response.data.user });
 			if (response.data.success === true) {
 				return { success: true, message: response.data.message };
