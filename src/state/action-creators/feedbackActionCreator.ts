@@ -1,10 +1,9 @@
-import axios from "axios";
 import { Dispatch } from "redux";
 import { CategoriesType, IComment, ICreatedComment, IFeedback } from "../../interfaces";
 import { ICreatedFeedback, ICommentReply } from "../../interfaces";
 import { OrderFilterType } from "../../interfaces/feedbackInterface";
 import { IPromisePath, IPromise } from "../../interfaces/promiseInterface";
-import { API_URL, authAxios } from "../../utils";
+import { authAxios } from "../../utils";
 import { Action } from "../action";
 import { ActionType } from "../action-types";
 
@@ -12,7 +11,7 @@ export const fetchFeedbacks = () => {
 	return async (dispatch: Dispatch<Action>) => {
 		dispatch({ type: ActionType.FETCH_FEEDBACKS });
 		try {
-			const data = await axios.get(API_URL + "/product-requests");
+			const data = await authAxios.get("/product-requests");
 			const requests: IFeedback[] = data.data.requests;
 			dispatch({
 				type: ActionType.FETCH_FEEDBACKS_COMPLETE,
@@ -31,7 +30,7 @@ export const fetchSingleFeedbackAction = (id: string) => {
 	return async (dispatch: Dispatch<Action>) => {
 		dispatch({ type: ActionType.FETCH_SINGLE_FEEDBACK });
 		try {
-			const data = await axios.get(API_URL + "/product-requests/" + id);
+			const data = await authAxios.get("/product-requests/" + id);
 			const request: IFeedback = data.data.request;
 			dispatch({
 				type: ActionType.FETCH_SINGLE_FEEDBACK_COMPLETE,
@@ -53,7 +52,7 @@ export const createFeedback = (feedback: ICreatedFeedback) => {
 		try {
 			const response = await authAxios.post("/product-requests", feedback);
 			if (response.data.success) {
-				const data = await axios.get(API_URL + "/product-requests/" + response.data.request._id);
+				const data = await authAxios.get("/product-requests/" + response.data.request._id);
 				const request: IFeedback = data.data.request;
 				dispatch({ type: ActionType.CREATE_FEEDBACK, payload: request });
 				return { success: true, path: request._id };
@@ -93,7 +92,7 @@ export const deleteFeedback = (feedbackId: string) => {
 		try {
 			const response = await authAxios.delete("/product-requests/" + feedbackId);
 			if (response) {
-				const data = await axios.get(API_URL + "/product-requests");
+				const data = await authAxios.get("/product-requests");
 				const requests: IFeedback[] = data.data.requests;
 				dispatch({ type: ActionType.DELETE_FEEDBACK, payload: requests });
 				return { success: true };
@@ -170,7 +169,7 @@ export const createComment = (commentBody: ICreatedComment) => {
 					`/product-requests/${productRequest}/${comment}/reply`,
 					commentBody
 				);
-				const data = await axios.get(API_URL + "/product-requests/" + productRequest);
+				const data = await authAxios.get("/product-requests/" + productRequest);
 				const target: IFeedback = data.data.request;
 
 				dispatch({ type: ActionType.CREATE_COMMENT, payload: target });
@@ -181,7 +180,7 @@ export const createComment = (commentBody: ICreatedComment) => {
 					productRequest,
 				});
 
-				const data = await axios.get(API_URL + "/product-requests/" + productRequest);
+				const data = await authAxios.get("/product-requests/" + productRequest);
 				const target: IFeedback = data.data.request;
 				dispatch({ type: ActionType.CREATE_COMMENT, payload: target });
 				return productRequest;

@@ -2,9 +2,8 @@ import { Dispatch } from "redux";
 import { INewUser, IuserCredentials } from "../../interfaces";
 import { ActionType } from "../action-types";
 import { Action } from "../action";
-import { API_URL, authAxios } from "../../utils";
+import { authAxios } from "../../utils";
 import { IPromise } from "../../interfaces/promiseInterface";
-import axios from "axios";
 
 export const verifyUserCookie = () => {
 	return async (dispatch: Dispatch<Action>) => {
