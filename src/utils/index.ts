@@ -2,7 +2,7 @@ import axios from "axios";
 
 // export const API_URL = "http://localhost:5000/api/v1";
 // export const API_URL = "https://fm-pfeedback-api.herokuapp.com/api/v1";
-export const API_URL = "/api/v1";
+export const API_URL = "https://pfeedback.api.micheltcha.com/api/v1";
 
 export const authAxios = axios.create({
 	baseURL: API_URL,
