@@ -68,6 +68,7 @@ export interface ISetUpvoteAction {
 }
 export interface ISetUpvoteCompleteAction {
 	type: ActionType.SET_UPVOTE_COMPLETE;
+	payload: { id: string; upvote: string[] };
 }
 export interface ISetUpvoteErrorAction {
 	type: ActionType.SET_UPVOTE_ERROR;

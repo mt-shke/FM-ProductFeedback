@@ -1,41 +1,14 @@
-import {
-	IFeedback,
-	IFeedbackState,
-	ICommentReply,
-	ICreatedFeedback,
-	IFeedbackComponent,
-	CategoriesType,
-	StatusType,
-} from "./feedbackInterface";
-import { IComment, ICommentDetailed, ICreatedComment } from "./commentInterface";
-import { IPageProps } from "./pageInterface";
-import IRoute from "./route";
 import { ReactNode } from "react";
-import { IUser, IUserState, IuserCredentials, INewUser } from "./userInterface";
-import { IPromisePath, IPromise } from "./promiseInterface";
 
-interface IComponent {
+export interface IComponent {
 	children?: ReactNode;
 	className?: string;
 	onClick?: (any: any) => void;
 }
 
-export type {
-	IComponent,
-	IPageProps,
-	IRoute,
-	IFeedback,
-	IFeedbackState,
-	IComment,
-	ICommentDetailed,
-	ICreatedComment,
-	IUser,
-	IUserState,
-	IuserCredentials,
-	ICommentReply,
-	ICreatedFeedback,
-	IFeedbackComponent,
-	CategoriesType,
-	INewUser,
-	StatusType,
-};
+export * from "./commentInterface";
+export * from "./feedbackInterface";
+export * from "./pageInterface";
+export * from "./promiseInterface";
+export * from "./route";
+export * from "./userInterface";

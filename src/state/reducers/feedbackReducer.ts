@@ -1,3 +1,4 @@
+import { act } from "react-dom/test-utils";
 import { IFeedback, IFeedbackState } from "../../interfaces";
 import { Action } from "../action";
 import { ActionType } from "../action-types";
@@ -29,6 +30,7 @@ const feedbackReducer = (state: IFeedbackState = initialState, action: Action) =
 				const index = state.data.findIndex((fb) => fb._id === action.payload._id);
 				updatedFeebacks = [...state.data].map((fb, ind) => (ind === index ? action.payload : fb));
 			}
+
 			return { ...state, data: updatedFeebacks, loading: false, targetFeedback: action.payload };
 		case ActionType.FETCH_SINGLE_FEEDBACK_ERROR:
 			return { ...state, loading: false, error: action.payload.errorMessage };
@@ -85,7 +87,22 @@ const feedbackReducer = (state: IFeedbackState = initialState, action: Action) =
 		case ActionType.SET_UPVOTE:
 			return { ...state, loading: true, error: null };
 		case ActionType.SET_UPVOTE_COMPLETE:
-			return { ...state, loading: false, error: null };
+			let updatedFeedbacks;
+			let updatedTarget;
+			if (state.data) {
+				const feedbackIndex = state.data.findIndex((fb) => fb._id === action.payload.id);
+				const updated = [...state.data];
+				updated[feedbackIndex].upvoters = action.payload.upvote;
+			}
+			if (state.targetFeedback?._id === action.payload.id) {
+				const updated = state.targetFeedback;
+				updated.upvoters = action.payload.upvote;
+			}
+
+			return {
+				...state,
+				loading: false,
+			};
 		case ActionType.SET_UPVOTE_ERROR:
 			return { ...state, loading: false, error: action.payload };
 

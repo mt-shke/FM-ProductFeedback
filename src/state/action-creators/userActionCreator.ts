@@ -24,9 +24,6 @@ export const loginUser = (credentials: IuserCredentials) => {
 		dispatch({ type: ActionType.LOGIN_USER });
 		try {
 			const response = await authAxios.post("/auth/login", credentials);
-
-			console.log(response);
-
 			dispatch({ type: ActionType.LOGIN_USER_COMPLETE, payload: response.data.user });
 			if (response.data.success === true) {
 				return { success: true, message: response.data.message };
@@ -41,9 +38,8 @@ export const loginUser = (credentials: IuserCredentials) => {
 };
 
 export const registerUser = (newUser: INewUser) => {
-	const { email, password, username } = newUser;
-
 	return async (dispatch: Dispatch<Action>): Promise<IPromise> => {
+		const { email, password, username } = newUser;
 		dispatch({ type: ActionType.REGISTER_USER });
 		try {
 			const response = await authAxios.post("/auth/register", newUser);
@@ -54,7 +50,6 @@ export const registerUser = (newUser: INewUser) => {
 		} catch (error: any) {
 			dispatch({ type: ActionType.REGISTER_USER_ERROR, payload: error.errorMessage as string });
 			const err = JSON.parse(JSON.stringify(error));
-			console.error(err);
 			return { success: false, message: err.message, status: err.status };
 		}
 	};
@@ -74,7 +69,24 @@ export const logoutUser = () => {
 			}
 		} catch (error: any) {
 			const err = JSON.parse(JSON.stringify(error));
-			console.error(err);
+			return { success: false, message: err.message, status: err.status };
+		}
+	};
+};
+
+export const activateEmail = ({ verificationToken, email }: { verificationToken: string; email: string }) => {
+	return async (dispatch: Dispatch<Action>): Promise<IPromise> => {
+		try {
+			const response = await authAxios.post("/auth/verify-email", { verificationToken, email });
+			if (response.data.success === true) {
+				return { success: true };
+			} else {
+				return {
+					success: false,
+				};
+			}
+		} catch (error: any) {
+			const err = JSON.parse(JSON.stringify(error));
 			return { success: false, message: err.message, status: err.status };
 		}
 	};

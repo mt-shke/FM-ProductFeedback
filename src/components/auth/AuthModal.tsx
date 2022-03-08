@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "./Login";
-import LoggedIn from "./login/LoggedIn";
 import Register from "./Register";
 
 interface IAuthModalProps {
@@ -39,7 +38,7 @@ const AuthModal: React.FC<IAuthModalProps> = ({ onClick }) => {
 			{!isLoggedIn && !register && (
 				<Login onLogin={setUserLoggedIn} onSwitchRegister={() => setRegister(true)} />
 			)}
-			{!isLoggedIn && register && <Register />}
+			{!isLoggedIn && register && <Register setModal={onClick} />}
 		</div>
 	);
 };

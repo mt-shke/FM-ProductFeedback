@@ -11,7 +11,7 @@ const MainDetailedFeedback: React.FC<IMainDetailedFeedbackProps> = ({ feedback }
 			{feedback ? (
 				<FeedbackCard feedback={feedback} />
 			) : (
-				<p className="w-full gridc p-4 rounded-lg bg-white">No feedback</p>
+				<p className="w-full gridc p-4 rounded-lg bg-white">...</p>
 			)}
 		</>
 	);

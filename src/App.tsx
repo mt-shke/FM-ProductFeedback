@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Reload from "./components/home/Reload";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
 import { useFeedback } from "./hooks/useFeedback";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import { useUser } from "./hooks/useUser";
@@ -7,6 +8,7 @@ import CreateFeedbackPage from "./pages/CreateFeedbackPage";
 import DetailedFeedbackPage from "./pages/DetailedFeedbackPage";
 import EditFeedbackPage from "./pages/EditFeedbackPage";
 import HomePage from "./pages/HomePage";
+import NewAccountPage from "./pages/NewAccountPage";
 import RoadmapPage from "./pages/RoadmapPage";
 
 const App: React.FC<{}> = () => {
@@ -26,16 +28,14 @@ const App: React.FC<{}> = () => {
 						<Route path="/edit-feedback/:id" element={<EditFeedbackPage data={data} />} />
 						<Route path="/create-feedback" element={<CreateFeedbackPage data={data} />} />
 						<Route path="/roadmap" element={<RoadmapPage data={data} />} />
+						<Route path="/new-account/:id" element={<NewAccountPage />} />
+						<Route path="*" element={<Navigate to="/" />} />
 					</Routes>
 				</BrowserRouter>
 			</div>
 		);
 
-	return (
-		<div className="w-screen h-screen gridc">
-			<div className="h-20 aspect-square rounded-full border-t-4 border-blue animate-spinning"></div>;
-		</div>
-	);
+	return <LoadingSpinner />;
 };
 
 export default App;

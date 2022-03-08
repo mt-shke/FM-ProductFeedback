@@ -133,8 +133,10 @@ export const setUpvote = (feedbackId: string) => {
 		try {
 			const response = await authAxios.post(`/product-requests/${feedbackId}/setupvote`);
 			if (response) {
-				dispatch({ type: ActionType.SET_UPVOTE_COMPLETE });
-				await fetchSingleFeedbackAction(feedbackId);
+				dispatch({
+					type: ActionType.SET_UPVOTE_COMPLETE,
+					payload: { id: feedbackId, upvote: response.data.upvote },
+				});
 				return { success: true };
 			} else {
 				dispatch({ type: ActionType.SET_UPVOTE_ERROR, payload: "Cannot set upvote" });

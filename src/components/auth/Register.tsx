@@ -1,11 +1,15 @@
 import { useRef, useState } from "react";
 import { useActions } from "../../hooks/useActions";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { INewUser } from "../../interfaces";
+import { INewUser, IPromise } from "../../interfaces";
 import { setCustomMessage, validateEmail } from "../../utils";
 import ModalMessage from "./ModalMessage";
 
-const Register: React.FC<{}> = () => {
+interface IRegisterProps {
+	setModal?: () => void;
+}
+
+const Register: React.FC<IRegisterProps> = ({ setModal }) => {
 	const emailRef = useRef<HTMLInputElement | null>(null);
 	const passwordRef = useRef<HTMLInputElement | null>(null);
 	const usernameRef = useRef<HTMLInputElement | null>(null);
@@ -21,30 +25,35 @@ const Register: React.FC<{}> = () => {
 		const username = usernameRef.current?.value.toString().trim();
 
 		if (!email || !password || !username) {
-			setCustomMessage("Please enter required field", setMsg);
+			setCustomMessage("Please enter required fields", setMsg);
 			return;
 		}
 
 		if (!validateEmail(email)) {
-			setCustomMessage("Please provid valid email", setMsg);
+			setCustomMessage("Please provid a valid email", setMsg);
 			return;
 		}
 
 		if (password.length < 6 || username?.length < 6) {
-			setCustomMessage("Please enter valid values - 6 characters minimum", setMsg);
+			setCustomMessage("Please enter valid values: 6 characters minimum", setMsg);
 			return;
 		}
 
 		const newUser: INewUser = { email, password, username };
-		// const response = await registerUser(newUser);
-		// if (error) {
-		// 	setCustomMessage(error, setMsg);
-		// 	return;
-		// }
-		// if (response.success) {
-		// 	setCustomMessage("Please check your email and activate your account before posting", setMsg)
+		const { success, message } = (await registerUser(newUser)) as IPromise;
 
-		// }
+		if (!success) {
+			console.error(message);
+			setCustomMessage("Please provid valid values", setMsg);
+			return;
+		}
+		setCustomMessage("Please check your email and activate your account", setMsg);
+
+		setTimeout(() => {
+			if (setModal) {
+				setModal();
+			}
+		}, 4000);
 	};
 
 	return (
@@ -85,9 +94,8 @@ const Register: React.FC<{}> = () => {
 					onClick={(e) => submitHandler(e)}
 					className="w-fit px-4 py-2 text-white bg-orange rounded-lg"
 					type="submit"
-					disabled
 				>
-					Disabled
+					Register
 				</button>
 			</form>
 		</>
