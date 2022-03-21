@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Reload from "./components/home/Reload";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
@@ -17,25 +18,24 @@ const App: React.FC<{}> = () => {
 	const data = { feedbacks: { feedbacks, targetFeedback }, user };
 	const { verified } = useTypedSelector((state) => state.user);
 
-	if (verified)
-		return (
-			<div className="animate-fade overflow-hidden">
-				<BrowserRouter>
-					<Routes>
-						<Route path="/" element={<HomePage data={data} />} />
-						<Route path="/reload" element={<Reload />} />
-						<Route path="/feedback/:id" element={<DetailedFeedbackPage data={data} />} />
-						<Route path="/edit-feedback/:id" element={<EditFeedbackPage data={data} />} />
-						<Route path="/create-feedback" element={<CreateFeedbackPage data={data} />} />
-						<Route path="/roadmap" element={<RoadmapPage data={data} />} />
-						<Route path="/new-account/:id" element={<NewAccountPage />} />
-						<Route path="*" element={<Navigate to="/" />} />
-					</Routes>
-				</BrowserRouter>
-			</div>
-		);
+	useEffect(() => {}, [verified]);
 
-	return <LoadingSpinner />;
+	return (
+		<div className="animate-fade overflow-hidden">
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<HomePage data={data} />} />
+					<Route path="/reload" element={<Reload />} />
+					<Route path="/feedback/:id" element={<DetailedFeedbackPage data={data} />} />
+					<Route path="/edit-feedback/:id" element={<EditFeedbackPage data={data} />} />
+					<Route path="/create-feedback" element={<CreateFeedbackPage data={data} />} />
+					<Route path="/roadmap" element={<RoadmapPage data={data} />} />
+					<Route path="/new-account/:id" element={<NewAccountPage />} />
+					<Route path="*" element={<Navigate to="/" />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 };
 
 export default App;

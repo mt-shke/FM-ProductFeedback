@@ -14,6 +14,9 @@ const AuthButtons: React.FC = () => {
 
 	const logoutHandler = async () => {
 		const { success } = (await logoutUser()) as IPromise;
+		if (success) {
+			navigate("/reload");
+		}
 	};
 
 	return (
