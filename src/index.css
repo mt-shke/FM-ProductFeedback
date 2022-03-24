@@ -11,28 +11,10 @@
 		@apply bg-gray text-s-grey font-jost text-[16px] leading-[23px];
 	}
 
-	header,
-	main,
-	footer {
-		/* @apply mx-auto grid items-center;  */
-	}
-
-	main {
-		/* @apply bg-white text-black gap-16 sm:gap-28 md:gap-44; */
-	}
-
-	main > section {
-		/* @apply ctn w-full; */
-	}
-
 	h1 {
 		@apply font-bold  text-[24px] leading-[35px] tracking-[0.33px];
-		/* @apply md:font-bold md: md:text-[56px] md:leading-[58px] md:tracking-[2px]
-		font-bold  text-[40px] leading-[44px] tracking-[1.5px]; */
 	}
 	h2 {
-		/* @apply lg:font-bold lg: lg:text-[40px] lg:leading-[44px] lg:tracking-[1.5px]
-		font-bold  text-[32px] leading-[36px] tracking-[1.15px]; */
 		@apply font-bold  text-[20px] leading-[29px] tracking-[0.25px];
 	}
 	h3 {

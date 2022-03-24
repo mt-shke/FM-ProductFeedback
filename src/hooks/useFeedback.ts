@@ -17,5 +17,5 @@ export const useFeedback = () => {
 		if (loading) return;
 		fetchFeedbacks();
 	}, [data]);
-	return { data, targetFeedback, categoryFilter };
+	return { data, targetFeedback, loading, categoryFilter };
 };

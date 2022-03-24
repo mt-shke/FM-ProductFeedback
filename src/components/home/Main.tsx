@@ -1,17 +1,18 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { useFeedback } from "../../hooks/useFeedback";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import useViewport from "../../hooks/useViewport";
 import { IPageProps } from "../../interfaces";
 import FeedbackList from "../feedback/FeedbackList";
 import AsideMenu from "../layout/header/nav/AsideMenu";
+import LoadingSpinner from "../UI/LoadingSpinner";
 import HeaderBar from "./HeaderBar";
 import NoFeedBack from "./NoFeedback";
 
 const Main: React.FC<IPageProps> = ({ data }) => {
 	const { data: updatedUser } = useTypedSelector((state) => state.user);
 	const feedbacks = data.feedbacks?.feedbacks;
-	const { data: updatedFeedbacks } = useFeedback();
+	const { data: updatedFeedbacks, loading } = useFeedback();
 	const viewport = useViewport();
 
 	const isMobile = viewport === "mobile";
@@ -29,6 +30,23 @@ const Main: React.FC<IPageProps> = ({ data }) => {
 				</section>
 			</main>
 		);
+
+	if (loading) {
+		return (
+			<main className="ctn h-full w-full flex flex-col md:grid md:grid-cols-4 md:px-6 md:mt-12 md:gap-6 xl:gap-12">
+				{!isMobile && <AsideMenu />}
+				<section className="md:flex-c6 md:col-start-2 md:col-end-5 xl:gap-12">
+					{!isMobile && <HeaderBar user={data.user} feedbacks={feedbacks} />}
+					{!feedbacks && (
+						<div className="flex items-center justify-center">
+							<LoadingSpinner />
+						</div>
+					)}
+					{feedbacks && <FeedbackList list={feedbacks} />}
+				</section>
+			</main>
+		);
+	}
 
 	return (
 		<main className="ctn h-full w-full flex flex-col md:grid md:grid-cols-4 md:px-6 md:mt-12 md:gap-6 xl:gap-12">
