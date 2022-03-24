@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+	html {
+		overflow-y: scroll;
+	}
+
 	body {
 		@apply bg-gray text-s-grey font-jost text-[16px] leading-[23px];
 	}

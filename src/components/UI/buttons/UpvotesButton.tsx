@@ -22,7 +22,8 @@ const UpvotesButton: React.FC<IUpvotesButtonProps> = ({
 	statusMode,
 }) => {
 	const user = useUser();
-	const userId = user && user._id ? user._id : user && user.userId ? user.userId : null;
+
+	const userId = user ? user.userId : null;
 
 	const [isUpvoter, setIsUpvoter] = useState<boolean>(
 		userId && upvoters?.find((upvoter) => upvoter === userId) ? true : false
