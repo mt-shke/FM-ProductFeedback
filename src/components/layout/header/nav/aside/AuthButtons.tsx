@@ -23,7 +23,7 @@ const AuthButtons: React.FC = () => {
 		<div className="flex-c6">
 			{!user && !modal && (
 				<Button
-					className="w-fit px-4 py-2 text-white bg-blue rounded-lg animate-fade"
+					className="w-fit px-4 py-2 text-white bg-blue rounded-lg animate-fade hover:bg-s-blue"
 					onClick={() => setModal(true)}
 				>
 					Login / Register
@@ -33,7 +33,7 @@ const AuthButtons: React.FC = () => {
 			{user && (
 				<Button
 					onClick={logoutHandler}
-					className="w-fit px-4 py-2 text-white bg-orange rounded-lg animate-fade"
+					className="w-fit px-4 py-2 text-white bg-orange rounded-lg animate-fade hover:opacity-80"
 				>
 					Logout
 				</Button>

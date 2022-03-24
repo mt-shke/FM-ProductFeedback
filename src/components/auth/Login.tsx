@@ -34,7 +34,6 @@ const Login: React.FC<ILoginProps> = ({ onLogin, addFeedback, onSwitchRegister }
 			return;
 		}
 		if (success) {
-			// setCustomMessage("Sorry: disabled for now, we are currently working on it!" as string, setErrorMessage);
 			if (addFeedback) navigate("/create-feedback");
 			onLogin();
 		}
@@ -70,14 +69,14 @@ const Login: React.FC<ILoginProps> = ({ onLogin, addFeedback, onSwitchRegister }
 				</label>
 				<button
 					onClick={(e) => submitHandler(e)}
-					className="w-fit px-4 py-2 text-white bg-blue rounded-lg"
+					className="w-fit px-4 py-2 text-white bg-blue rounded-lg hover:bg-s-blue transition-all duration-300"
 					type="submit"
 				>
 					Login
 				</button>
 				<button
 					onClick={onSwitchRegister}
-					className="w-fit px-4 py-2 text-white bg-orange rounded-lg"
+					className="w-fit px-4 py-2 text-white bg-orange rounded-lg hover:opacity-80 transition-all duration-300"
 					type="button"
 				>
 					Create Account

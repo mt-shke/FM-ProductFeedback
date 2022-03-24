@@ -27,7 +27,10 @@ const AddFeedbackButton: React.FC<IAddFeedbackButtonProps> = ({ children, classN
 
 	return (
 		<>
-			<Button onClick={checkUser} className={`${className} w-fit gridc px-4 bg-purple rounded-xl`}>
+			<Button
+				onClick={checkUser}
+				className={`${className} w-fit gridc px-4 bg-purple rounded-xl hover:opacity-70 `}
+			>
 				{children}
 			</Button>
 			{modal && <AuthModal onClick={() => setModal(false)} />}
