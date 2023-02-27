@@ -5,6 +5,7 @@ import useViewport from "../../hooks/useViewport";
 import { IPageProps } from "../../interfaces";
 import FeedbackList from "../feedback/FeedbackList";
 import AsideMenu from "../layout/header/nav/AsideMenu";
+import HomeSpinner from "../UI/HomeSpinner";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import HeaderBar from "./HeaderBar";
 import NoFeedBack from "./NoFeedback";
@@ -48,7 +49,7 @@ const Main: React.FC<IPageProps> = ({ data }) => {
                     )}
                     {!feedbacks && (
                         <div className="flex flex-col gap-4 items-center justify-center ">
-                            <LoadingSpinner />
+                            <HomeSpinner />
                         </div>
                     )}
                     {feedbacks && <FeedbackList list={feedbacks} />}
