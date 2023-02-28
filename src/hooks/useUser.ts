@@ -8,7 +8,7 @@ export const useUser = () => {
     const { verifyUserCookie } = useActions();
     useEffect(() => {
         if (verified) return;
-        if (data === null) return;
+        if (!data) return;
         if (loading) return;
 
         // TODO

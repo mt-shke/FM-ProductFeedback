@@ -6,7 +6,6 @@ import { IPageProps } from "../../interfaces";
 import FeedbackList from "../feedback/FeedbackList";
 import AsideMenu from "../layout/header/nav/AsideMenu";
 import HomeSpinner from "../UI/HomeSpinner";
-import LoadingSpinner from "../UI/LoadingSpinner";
 import HeaderBar from "./HeaderBar";
 import NoFeedBack from "./NoFeedback";
 

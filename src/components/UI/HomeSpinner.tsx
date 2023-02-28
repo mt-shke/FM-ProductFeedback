@@ -5,7 +5,7 @@ const HomeSpinner: React.FC = () => {
             <p>Please wait a moment...</p>
             <div className="flex flex-col items-center px-4">
                 <p>Fetching data from MongoDB: </p>
-                <p className="italic opacity-30 hover:opacity-100 hover:animate-fade">
+                <p className="italic opacity-30 hover:opacity-100 hover:animate-fade text-center">
                     {`it usually takes ~+10 sec when requesting data for the first time and server is down(using test account)...`}
                 </p>
             </div>
