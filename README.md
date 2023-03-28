@@ -1,3 +1,10 @@
+<h1 style='padding:1rem;font-weight:bold' align='center'>FM Product Feedback</h1>
+
+## Product Feedback front-end
+
+- A challenge by frontendmentor.io
+- Using React, Typescript, TailwindCSS, Redux
+
 <details>
 <summary>Todo</summary>
 
